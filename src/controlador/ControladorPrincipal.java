@@ -9,7 +9,7 @@ import vista.MenuPrincipal;
 
 /**
  *
- * @author fta
+ * @author jtech
  */
 public class ControladorPrincipal implements ActionListener {
 
@@ -71,6 +71,10 @@ public class ControladorPrincipal implements ActionListener {
             case 2:
                 menuPrincipal.getFrame().setVisible(false);
                 ControladorRecanvis controladorRecanvis = new ControladorRecanvis();
+                break;
+            case 3:
+                menuPrincipal.getFrame().setVisible(false);
+                ControladorClients controladorClients = new ControladorClients();
                 break;
         }
 

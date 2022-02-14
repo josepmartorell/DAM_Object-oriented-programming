@@ -8,7 +8,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author fta
+ * @author jtech
  */
 public class RecanviForm {
     

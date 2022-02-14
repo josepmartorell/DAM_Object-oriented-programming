@@ -5,7 +5,7 @@ import principal.Component;
 
 /**
  *
- * @author cesca
+ * @author jtech
  */
 public abstract class Persona implements Component {
     

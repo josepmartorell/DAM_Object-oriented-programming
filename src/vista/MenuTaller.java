@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author fta
+ * @author jtech
  */
 public class MenuTaller {
 

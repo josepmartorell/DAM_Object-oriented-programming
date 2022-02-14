@@ -18,7 +18,7 @@ import principal.GestorTallerMecanicException;
 
 /**
  *
- * @author fta
+ * @author jtech
  */
 public class Reparacio implements Component{
 

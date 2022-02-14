@@ -15,7 +15,7 @@ import vista.MenuTaller;
 
 /**
  *
- * @author fta
+ * @author jtech
  */
 public class ControladorTaller implements ActionListener {
 

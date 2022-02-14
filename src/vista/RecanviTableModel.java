@@ -7,7 +7,7 @@ import principal.Component;
 
 /**
  *
- * @author fta
+ * @author jtech
  */
 public class RecanviTableModel extends AbstractTableModel {
 

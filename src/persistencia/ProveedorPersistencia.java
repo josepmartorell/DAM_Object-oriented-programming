@@ -6,7 +6,7 @@ import model.Taller;
 
 /**
  *
- * @author jma
+ * @author jtech
  */
 public interface ProveedorPersistencia {
     public void desarTaller(String nomFitxer, Taller taller)throws GestorTallerMecanicException;

@@ -8,7 +8,7 @@ import javax.swing.JTable;
 
 /**
  *
- * @author fta
+ * @author jtech
  */
 public final class RecanviLlista {
     

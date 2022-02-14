@@ -2,7 +2,7 @@ package principal;
 
 /**
  *
- * @author jma
+ * @author jtech
  */
 public class GestorTallerMecanicException extends Exception {
 

@@ -5,7 +5,7 @@ import javax.swing.SwingUtilities;
 
 /**
  *
- * @author jma
+ * @author jtech
  */
 public class Main {
 

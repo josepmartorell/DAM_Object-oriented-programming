@@ -5,7 +5,7 @@ import model.Taller;
 
 /**
  *
- * @author jma
+ * @author jtech
  */
 public class GestorPersistencia {
 

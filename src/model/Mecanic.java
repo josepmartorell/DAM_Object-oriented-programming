@@ -6,7 +6,7 @@ package model;
 
 /**
  *
- * @author fta
+ * @author jtech
  */
 public class Mecanic extends Persona {
 

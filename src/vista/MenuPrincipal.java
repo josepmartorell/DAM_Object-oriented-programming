@@ -6,13 +6,13 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author fta
+ * @author jtech
  */
 public class MenuPrincipal {
     
     private JFrame frame;
 
-    private JButton[] menuButtons = new JButton[3];
+    private JButton[] menuButtons = new JButton[4];
 
     private final int AMPLADA = 800;
     private final int ALCADA = 600;
@@ -47,6 +47,7 @@ public class MenuPrincipal {
         menuButtons[0] = new JButton("0. Sortir");
         menuButtons[1] = new JButton("1. Menú Tallers");
         menuButtons[2] = new JButton("2. Menú Recanvis");
+        menuButtons[3] = new JButton("3. Menú Clients");
 
         //Addició dels botons a la finestra
         for (JButton boto : menuButtons) {

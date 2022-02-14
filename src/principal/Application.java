@@ -12,7 +12,7 @@ import persistencia.GestorXML;
 
 /**
  *
- * @author jma
+ * @author jtech
  */
 public class Application {
 

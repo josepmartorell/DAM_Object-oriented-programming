@@ -11,7 +11,7 @@ import vista.RecanviLlista;
 
 /**
  *
- * @author fta
+ * @author jtech
  */
 public class ControladorRecanvis implements ActionListener {
 
@@ -62,7 +62,7 @@ public class ControladorRecanvis implements ActionListener {
             }
         }
 
-        //Accions per al formulari de mestres
+        //Accions per al formulari de recanvis
         if (recanviForm != null) {
 
             if (e.getSource() == recanviForm.getDesar()) {

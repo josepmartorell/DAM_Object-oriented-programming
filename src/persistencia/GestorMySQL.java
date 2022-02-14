@@ -12,7 +12,7 @@ import principal.GestorTallerMecanicException;
 
 /**
  *
- * @author jma
+ * @author jtech
  */
 public class GestorMySQL implements ProveedorPersistencia {
 

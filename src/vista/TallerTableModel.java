@@ -6,7 +6,7 @@ import model.Taller;
 
 /**
  *
- * @author fta
+ * @author jtech
  */
 public class TallerTableModel extends AbstractTableModel{
     
