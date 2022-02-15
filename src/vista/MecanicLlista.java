@@ -21,7 +21,7 @@ public class MecanicLlista {
     private final int AMPLADA = 600;
     private final int ALCADA = 200;
     
-    private JTable tClients;
+    private JTable tMecanics;
 
     private JButton sortir;
     
@@ -30,11 +30,11 @@ public class MecanicLlista {
         frame = new JFrame("Llista de Mecanics");
         frame.setLayout(new GridLayout(0, 1));
         
-        tClients = new JTable(new ClientTableModel());
+        tMecanics = new JTable(new MecanicTableModel());
         
         sortir = new JButton("Sortir");
         
-        frame.add(new JScrollPane(tClients));
+        frame.add(new JScrollPane(tMecanics));
         frame.add(sortir);
         
         showFinestra();
@@ -56,7 +56,7 @@ public class MecanicLlista {
     }
 
     public JTable gettClients() {
-        return tClients;
+        return tMecanics;
     }
 
     public JButton getSortir() {
@@ -68,7 +68,7 @@ public class MecanicLlista {
     }
 
     public void settClients(JTable tClients) {
-        this.tClients = tClients;
+        this.tMecanics = tClients;
     }
 
     public void setSortir(JButton sortir) {
