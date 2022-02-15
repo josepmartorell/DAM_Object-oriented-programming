@@ -12,7 +12,7 @@ public class MenuPrincipal {
     
     private JFrame frame;
 
-    private JButton[] menuButtons = new JButton[4];
+    private JButton[] menuButtons = new JButton[5];
 
     private final int AMPLADA = 800;
     private final int ALCADA = 600;
@@ -48,6 +48,7 @@ public class MenuPrincipal {
         menuButtons[1] = new JButton("1. Menú Tallers");
         menuButtons[2] = new JButton("2. Menú Recanvis");
         menuButtons[3] = new JButton("3. Menú Clients");
+        menuButtons[4] = new JButton("4. Menú Mecanics");
 
         //Addició dels botons a la finestra
         for (JButton boto : menuButtons) {
