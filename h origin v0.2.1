@@ -1,0 +1,51 @@
+[33mcommit 85f3f4720d323cbc2663c7468cf3f9ced33004ef[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;33mtag: v0.2.1[m[33m, [m[1;31morigin/dam[m[33m, [m[1;32mdam[m[33m)[m
+Author: josepmartorell <martorelljosep@gmail.com>
+Date:   Tue Feb 15 20:15:45 2022 +0100
+
+    patch version
+
+[1mdiff --git a/src/vista/MecanicLlista.java b/src/vista/MecanicLlista.java[m
+[1mindex 44791d2..634c268 100644[m
+[1m--- a/src/vista/MecanicLlista.java[m
+[1m+++ b/src/vista/MecanicLlista.java[m
+[36m@@ -21,7 +21,7 @@[m [mpublic class MecanicLlista {[m
+     private final int AMPLADA = 600;[m
+     private final int ALCADA = 200;[m
+     [m
+[31m-    private JTable tClients;[m
+[32m+[m[32m    private JTable tMecanics;[m
+ [m
+     private JButton sortir;[m
+     [m
+[36m@@ -30,11 +30,11 @@[m [mpublic class MecanicLlista {[m
+         frame = new JFrame("Llista de Mecanics");[m
+         frame.setLayout(new GridLayout(0, 1));[m
+         [m
+[31m-        tClients = new JTable(new ClientTableModel());[m
+[32m+[m[32m        tMecanics = new JTable(new MecanicTableModel());[m
+         [m
+         sortir = new JButton("Sortir");[m
+         [m
+[31m-        frame.add(new JScrollPane(tClients));[m
+[32m+[m[32m        frame.add(new JScrollPane(tMecanics));[m
+         frame.add(sortir);[m
+         [m
+         showFinestra();[m
+[36m@@ -56,7 +56,7 @@[m [mpublic class MecanicLlista {[m
+     }[m
+ [m
+     public JTable gettClients() {[m
+[31m-        return tClients;[m
+[32m+[m[32m        return tMecanics;[m
+     }[m
+ [m
+     public JButton getSortir() {[m
+[36m@@ -68,7 +68,7 @@[m [mpublic class MecanicLlista {[m
+     }[m
+ [m
+     public void settClients(JTable tClients) {[m
+[31m-        this.tClients = tClients;[m
+[32m+[m[32m        this.tMecanics = tClients;[m
+     }[m
+ [m
+     public void setSortir(JButton sortir) {[m

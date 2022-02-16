@@ -18,22 +18,21 @@ public class ClientTableModel extends AbstractTableModel{
     private final String[] columnNames = {"Nif", "Nom", "Telefon", "Correu"};
 
     private String[][] data;
-    
-    public ClientTableModel(){
+
+    public ClientTableModel() {
         
         int i = 0;
         
-        int totalClients = 0;
-    
-        for (int j = 0; j < ControladorPrincipal.getTallerActual().getComponents().size(); i++){
-            if (ControladorPrincipal.getTallerActual().getComponents().get(j) instanceof Client){
-                totalClients++;
-            
-            }          
-            
+        int totalRecanvis = 0;
+
+        for (int j = 0; j < ControladorPrincipal.getTallerActual().getComponents().size(); j++) {
+
+            if (ControladorPrincipal.getTallerActual().getComponents().get(j) instanceof Client) {
+                totalRecanvis++;
+            }           
         }
-    
-        data = new String[totalClients][4];
+
+        data = new String[totalRecanvis][4];
         
         for (Component component : ControladorPrincipal.getTallerActual().getComponents()) {
             if (component instanceof Client) {
@@ -44,31 +43,26 @@ public class ClientTableModel extends AbstractTableModel{
                 i++;
             }
         }
-    
     }
-    
+
     @Override
-    public int getRowCount(){
+    public int getRowCount() {
         return data.length;
     }
-    
+
     @Override
-    public int getColumnCount(){
+    public int getColumnCount() {
         return data[0].length;
     }
-    
+
     @Override
     public String getColumnName(int col) {
         return columnNames[col];
     }
-    
+
     @Override
-    public Object getValueAt(int row, int column){
+    public Object getValueAt(int row, int column) {
         return data[row][column];
-        
     }
-
-
-    
     
 }
