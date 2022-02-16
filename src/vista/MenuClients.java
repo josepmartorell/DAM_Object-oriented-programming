@@ -20,13 +20,13 @@ public class MenuClients {
 
     private final int AMPLADA = 800;
     private final int ALCADA = 600;
-    
-    public MenuClients(){
+
+    public MenuClients() {
         
         //Definició de la finestra del menú
-        frame = new JFrame("Menu Clients");
+        frame = new JFrame("Menú Clients");
         frame.setLayout(new GridLayout(0, 1));
-        
+
         //Creació dels botons a la llista
         menuButtons[0] = new JButton("0. Sortir");
         menuButtons[1] = new JButton("1. Alta Client");
@@ -50,19 +50,16 @@ public class MenuClients {
         return frame;
     }
 
-    public JButton[] getMenuButtons() {
-        return menuButtons;
-    }
-
     public void setFrame(JFrame frame) {
         this.frame = frame;
+    }
+
+    public JButton[] getMenuButtons() {
+        return menuButtons;
     }
 
     public void setMenuButtons(JButton[] menuButtons) {
         this.menuButtons = menuButtons;
     }
-    
-    
-    
     
 }

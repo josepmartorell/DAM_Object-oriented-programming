@@ -23,58 +23,52 @@ public class ClientLlista {
     
     private JTable tClients;
 
-    private JButton sortir;
+    private JButton sortir;   
     
-    public ClientLlista(){
-    
+
+    public ClientLlista() {
         frame = new JFrame("Llista de Clients");
         frame.setLayout(new GridLayout(0, 1));
-        
+
         tClients = new JTable(new ClientTableModel());
         
         sortir = new JButton("Sortir");
-        
-        frame.add(new JScrollPane(tClients));
+
+        frame.add(new JScrollPane(tClients));  
         frame.add(sortir);
-        
+
         showFinestra();
-        
-        
     }
     
     private void showFinestra(){
-        
+        //Es mostra la finestra amb propietats per defecte
         frame.setSize(AMPLADA, ALCADA);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-
-    
     }
 
     public JFrame getFrame() {
         return frame;
     }
 
-    public JTable gettClients() {
+    public void setFrame(JFrame frame) {
+        this.frame = frame;
+    }
+
+    public JTable gettRecanvis() {
         return tClients;
     }
+
+    public void settRecanvis(JTable tRecanvis) {
+        this.tClients = tClients;
+    }    
 
     public JButton getSortir() {
         return sortir;
     }
 
-    public void setFrame(JFrame frame) {
-        this.frame = frame;
-    }
-
-    public void settClients(JTable tClients) {
-        this.tClients = tClients;
-    }
-
     public void setSortir(JButton sortir) {
         this.sortir = sortir;
     }
-    
-    
     
 }
