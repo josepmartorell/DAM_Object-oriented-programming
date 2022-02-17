@@ -67,12 +67,12 @@ public class ClientForm {
         showFinestra();
     }
     
-    public ClientForm(String codi, String nom, String fabricant, double preu){
+    public ClientForm(String nif, String nom, String telefon, String correu){
         this();
-        tNif.setText(codi);
+        tNif.setText(nif);
         tNom.setText(nom);
-        tTelefon.setText(fabricant);
-        tCorreu.setText(String.valueOf(preu));
+        tTelefon.setText(telefon);
+        tCorreu.setText(correu);
     }
     
     private void showFinestra(){
@@ -126,7 +126,7 @@ public class ClientForm {
         return lTelefon;
     }
 
-    public void setlTelefon(JLabel lFabricant) {
+    public void setlTelefon(JLabel lTelefon) {
         this.lTelefon = lTelefon;
     }
 

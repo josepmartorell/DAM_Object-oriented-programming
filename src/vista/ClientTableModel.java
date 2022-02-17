@@ -23,16 +23,16 @@ public class ClientTableModel extends AbstractTableModel{
         
         int i = 0;
         
-        int totalRecanvis = 0;
+        int totalClients = 0;
 
         for (int j = 0; j < ControladorPrincipal.getTallerActual().getComponents().size(); j++) {
 
             if (ControladorPrincipal.getTallerActual().getComponents().get(j) instanceof Client) {
-                totalRecanvis++;
+                totalClients++;
             }           
         }
 
-        data = new String[totalRecanvis][4];
+        data = new String[totalClients][4];
         
         for (Component component : ControladorPrincipal.getTallerActual().getComponents()) {
             if (component instanceof Client) {
