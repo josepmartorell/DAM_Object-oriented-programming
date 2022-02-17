@@ -55,11 +55,11 @@ public class ClientLlista {
         this.frame = frame;
     }
 
-    public JTable gettRecanvis() {
+    public JTable gettClients() {
         return tClients;
     }
 
-    public void settRecanvis(JTable tRecanvis) {
+    public void settClients(JTable tClients) {
         this.tClients = tClients;
     }    
 
