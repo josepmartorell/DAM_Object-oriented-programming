@@ -84,6 +84,10 @@ public class ControladorPrincipal implements ActionListener {
                 menuPrincipal.getFrame().setVisible(false);
                     ControladorVehicles controladorVehicles = new ControladorVehicles();
                 break;
+            case 6:
+                menuPrincipal.getFrame().setVisible(false);
+                    ControladorReparacions controladorReparacions = new ControladorReparacions();
+                break;
         }
 
     }

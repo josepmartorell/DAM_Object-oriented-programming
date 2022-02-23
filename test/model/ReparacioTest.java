@@ -37,11 +37,11 @@ public class ReparacioTest {
     @Test
     public void testGetCodi() {
         System.out.println("getCodi");
-        String codi = "g1"; 
-        String dataInici = "1";
-        String dataFi = "31";
+        String codi = "r108"; 
+        String dataInici = "2022/03/31";
+        String dataFi = "2022/04/04";
         Reparacio instance = new Reparacio(codi, dataInici, dataFi);
-        String expResult = "g1";
+        String expResult = "r108";
         String result = instance.getCodi();
         assertEquals(expResult, result);
     }
@@ -52,25 +52,28 @@ public class ReparacioTest {
     @Test
     public void testSetCodi() {
         System.out.println("setCodi");
-        String codi = "s1";
-        String newCodi = "new1";
-        String dataInici = "1";
-        String dataFi = "31";
+        String codi = "r108";
+        String dataInici = "2022/03/31";
+        String dataFi = "2022/04/04";
         Reparacio instance = new Reparacio(codi, dataInici, dataFi);
-        instance.setCodi(newCodi);
+        String setCodi = "r115";
+        instance.setCodi(setCodi);
+        String expResult = "r115";
         String result = instance.getCodi();
-        assertEquals("new1", result);
+        assertEquals(expResult, result);
     }
 
     /**
      * Test of getDataInici method, of class Reparacio.
      */
-    @Ignore
     @Test
     public void testGetDataInici() {
         System.out.println("getDataInici");
-        Reparacio instance = null;
-        String expResult = "";
+        String codi = "r108"; 
+        String dataInici = "2022/03/31";
+        String dataFi = "2022/04/04";
+        Reparacio instance = new Reparacio(codi, dataInici, dataFi);
+        String expResult = "2022/03/31";
         String result = instance.getDataInici();
         assertEquals(expResult, result);
     }
@@ -78,24 +81,32 @@ public class ReparacioTest {
     /**
      * Test of setDataInici method, of class Reparacio.
      */
-    @Ignore
     @Test
     public void testSetDataInici() {
         System.out.println("setDataInici");
-        String dataInici = "";
-        Reparacio instance = null;
-        instance.setDataInici(dataInici);
+        String codi = "r108"; 
+        String dataInici = "2022/03/31";
+        String dataFi = "2022/04/04";
+        Reparacio instance = new Reparacio(codi, dataInici, dataFi);
+        String setDataInici = "2022/04/01";
+        instance.setDataInici(setDataInici);
+        String expResult = "2022/04/01";
+        String result = instance.getDataInici();
+        assertEquals(expResult, result);
+        
     }
 
     /**
      * Test of getDataFi method, of class Reparacio.
      */
-    @Ignore
     @Test
     public void testGetDataFi() {
         System.out.println("getDataFi");
-        Reparacio instance = null;
-        String expResult = "";
+        String codi = "r108"; 
+        String dataInici = "2022/03/31";
+        String dataFi = "2022/04/04";
+        Reparacio instance = new Reparacio(codi, dataInici, dataFi);
+        String expResult = "2022/04/04";
         String result = instance.getDataFi();
         assertEquals(expResult, result);
     }
@@ -103,23 +114,31 @@ public class ReparacioTest {
     /**
      * Test of setDataFi method, of class Reparacio.
      */
-    @Ignore
     @Test
     public void testSetDataFi() {
         System.out.println("setDataFi");
-        String dataFi = "";
-        Reparacio instance = null;
-        instance.setDataFi(dataFi);
+        String codi = "r108"; 
+        String dataInici = "2022/03/31";
+        String dataFi = "2022/04/04";
+        Reparacio instance = new Reparacio(codi, dataInici, dataFi);
+        String setDataFi = "2022/04/08";
+        instance.setDataFi(setDataFi);
+        String expResult = "2022/04/08";
+        String result = instance.getDataFi();
+        assertEquals(expResult, result);
     }
 
     /**
      * Test of getPreu method, of class Reparacio.
      */
-    @Ignore
     @Test
     public void testGetPreu() {
         System.out.println("getPreu");
-        Reparacio instance = null;
+        String codi = "r108"; 
+        String dataInici = "2022/03/31";
+        String dataFi = "2022/04/04";
+        Reparacio instance = new Reparacio(codi, dataInici, dataFi);
+        instance.setPreu(0.0);
         double expResult = 0.0;
         double result = instance.getPreu();
         assertEquals(expResult, result, 0.0);
@@ -128,23 +147,29 @@ public class ReparacioTest {
     /**
      * Test of setPreu method, of class Reparacio.
      */
-    @Ignore
     @Test
     public void testSetPreu() {
         System.out.println("setPreu");
-        double preu = 0.0;
-        Reparacio instance = null;
-        instance.setPreu(preu);
+        String codi = "r108"; 
+        String dataInici = "2022/03/31";
+        String dataFi = "2022/04/04";
+        Reparacio instance = new Reparacio(codi, dataInici, dataFi);
+        double setPreu = 475.0;
+        instance.setPreu(setPreu);
+        double expResult = 475.0;
+        double result = instance.getPreu();
     }
 
     /**
      * Test of getClient method, of class Reparacio.
      */
-    @Ignore
     @Test
     public void testGetClient() {
         System.out.println("getClient");
-        Reparacio instance = null;
+        String codi = "r108"; 
+        String dataInici = "2022/03/31";
+        String dataFi = "2022/04/04";
+        Reparacio instance = new Reparacio(codi, dataInici, dataFi);
         Client expResult = null;
         Client result = instance.getClient();
         assertEquals(expResult, result);
@@ -153,13 +178,18 @@ public class ReparacioTest {
     /**
      * Test of setClient method, of class Reparacio.
      */
-    @Ignore
     @Test
     public void testSetClient() {
         System.out.println("setClient");
+        String codi = "r108"; 
+        String dataInici = "2022/03/31";
+        String dataFi = "2022/04/04";
+        Reparacio instance = new Reparacio(codi, dataInici, dataFi);
         Client client = null;
-        Reparacio instance = null;
         instance.setClient(client);
+        Client expResult = null;
+        Client result = instance.getClient();
+        assertEquals(expResult, result);
     }
 
     /**
@@ -185,29 +215,6 @@ public class ReparacioTest {
         Map<String, ArrayList> elements = null;
         Reparacio instance = null;
         instance.setElements(elements);
-    }
-
-    /**
-     * Test of addReparacio method, of class Reparacio.
-     */
-    @Ignore
-    @Test
-    public void testAddReparacio() {
-        System.out.println("addReparacio");
-        Reparacio expResult = null;
-        Reparacio result = Reparacio.addReparacio();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of updateComponent method, of class Reparacio.
-     */
-    @Ignore
-    @Test
-    public void testUpdateComponent() {
-        System.out.println("updateComponent");
-        Reparacio instance = null;
-        instance.updateComponent();
     }
 
     /**
@@ -246,15 +253,5 @@ public class ReparacioTest {
         instance.addPreu(totalHores);
     }
 
-    /**
-     * Test of showComponent method, of class Reparacio.
-     */
-    @Ignore
-    @Test
-    public void testShowComponent() {
-        System.out.println("showComponent");
-        Reparacio instance = null;
-        instance.showComponent();
-    }
     
 }
