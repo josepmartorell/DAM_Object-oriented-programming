@@ -7,6 +7,7 @@ package vista;
 import controlador.ControladorPrincipal;
 import javax.swing.table.AbstractTableModel;
 import model.Client;
+import model.Recanvi;
 import principal.Component;
 
 /**
@@ -15,7 +16,7 @@ import principal.Component;
  */
 public class ClientTableModel extends AbstractTableModel{
     
-    private final String[] columnNames = {"Nif", "Nom", "Telefon", "Correu"};
+    private final String[] columnNames = {"Nif", "Nom", "Teléfon", "Correu"};
 
     private String[][] data;
 
@@ -24,28 +25,34 @@ public class ClientTableModel extends AbstractTableModel{
         int i = 0;
         
         int totalClients = 0;
-
-        for (int j = 0; j < ControladorPrincipal.getTallerActual().getComponents().size(); j++) {
-
-            if (ControladorPrincipal.getTallerActual().getComponents().get(j) instanceof Client) {
+        
+        for (int j = 0; j < ControladorPrincipal.getTallerActual().getComponents().size(); j++){
+            if (ControladorPrincipal.getTallerActual().getComponents().get(j) instanceof Recanvi) {
                 totalClients++;
-            }           
+            }  
         }
-
+        
         data = new String[totalClients][4];
         
-        for (Component component : ControladorPrincipal.getTallerActual().getComponents()) {
-            if (component instanceof Client) {
+        for (Component component: ControladorPrincipal.getTallerActual().getComponents()){
+            if (component instanceof Client){
                 data[i][0] = ((Client)component).getNif();
                 data[i][1] = ((Client)component).getNom();
                 data[i][2] = ((Client)component).getTelefon();
                 data[i][3] = ((Client)component).getCorreu();
                 i++;
+                
+            
             }
+        
+        
         }
+        
+        
+        
     }
-
-    @Override
+    
+        @Override
     public int getRowCount() {
         return data.length;
     }
@@ -64,5 +71,8 @@ public class ClientTableModel extends AbstractTableModel{
     public Object getValueAt(int row, int column) {
         return data[row][column];
     }
+    
+    
+    
     
 }
