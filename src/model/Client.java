@@ -4,9 +4,11 @@
  */
 package model;
 
+import static principal.Component.DADES;
+
 /**
  *
- * @author jtech
+ * @author fta
  */
 public class Client extends Persona {
 

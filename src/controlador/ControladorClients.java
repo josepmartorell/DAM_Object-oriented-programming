@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controlador;
 
 import java.awt.event.ActionEvent;
@@ -9,16 +5,18 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import model.Client;
+import persistencia.GestorPersistencia;
+import principal.GestorTallerMecanicException;
+import vista.MenuClients;
 import vista.ClientForm;
 import vista.ClientLlista;
-import vista.MenuClients;
 
 /**
  *
- * @author jtech
+ * @author fta
  */
 public class ControladorClients implements ActionListener {
-    
+
     private MenuClients menuClients;
     private ClientForm clientForm = null;
     private ClientLlista clientLlista = null;
@@ -106,7 +104,8 @@ public class ControladorClients implements ActionListener {
                 ControladorPrincipal.getMenuPrincipal().getFrame().setVisible(true);
                 break;
             case 1: // alta
-                if (ControladorPrincipal.getTallers()[0] != null) {
+                  //if (ControladorPrincipal.getTallers()[0] != null) {
+                  if (ControladorPrincipal.getTallerActual() != null) {//substitute
                     clientForm = new ClientForm();
                     afegirListenersForm();
                 } else {
@@ -115,7 +114,8 @@ public class ControladorClients implements ActionListener {
                 }
                 break;
             case 2: // llista
-                if (ControladorPrincipal.getTallers()[0] != null) {
+                //if (ControladorPrincipal.getTallers()[0] != null) {
+                if (ControladorPrincipal.getTallerActual() != null) {//substitute
                     clientLlista = new ClientLlista();
                     afegirListenersLlista();
                 } else {
@@ -124,8 +124,44 @@ public class ControladorClients implements ActionListener {
                 }
 
                 break;
+                
+            case 3: //desar
+                /*
+                TODO
+                
+                Es comprova si s'ha seleccionat el taller, mostrant, si correspon, un missatges d'error (JOptionPane.showMessageDialog)
+                Si s'ha seleccionat el taller:
+                    - Es mostra un dialog (JOptionPane.showOptionDialog) amb botons, on cadascun d'ells és un mètode de càrrega
+                      (atribut de Controlador Principal: ara XML i Serial)
+                    - Un cop escollit el mètode, es desa el taller cridant a desarTaller del gestor de persistència.
+                 */
+                
+                menuClients.getFrame().setVisible(true);
+                
+                if (ControladorPrincipal.getTallerActual() != null) {
+                    
+                    int tipusMissatge = JOptionPane.QUESTION_MESSAGE;
+                    int codi = JOptionPane.showOptionDialog(null, "Selecciona un mètode", "Desar taller", 0, tipusMissatge, null, ControladorPrincipal.getMETODESPERSISTENCIA(), "XML");
+                    
+                    if (codi != JOptionPane.CLOSED_OPTION) {
+                        
+                        GestorPersistencia gestor = new GestorPersistencia();
+                        
+                        try {                            
+                            gestor.desarTaller(ControladorPrincipal.getMETODESPERSISTENCIA()[codi], ControladorPrincipal.getTallerActual().getCif(), ControladorPrincipal.getTallerActual());
+                        } catch (GestorTallerMecanicException e) {                            
+                            JOptionPane.showMessageDialog(menuClients.getFrame(), e.getMessage());                            
+                        }
+                        
+                    }
+                    
+                } else {                    
+                    JOptionPane.showMessageDialog(menuClients.getFrame(), "Abans s'ha de seleccionar un taller");                
+                }
+
+                break;
         }
 
     }
-    
+
 }

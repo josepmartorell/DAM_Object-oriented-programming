@@ -5,6 +5,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -195,12 +196,16 @@ public class ReparacioTest {
     /**
      * Test of getElements method, of class Reparacio.
      */
-    @Ignore
     @Test
     public void testGetElements() {
         System.out.println("getElements");
-        Reparacio instance = null;
-        Map<String, ArrayList> expResult = null;
+        String codi = "r108"; 
+        String dataInici = "2022/03/31";
+        String dataFi = "2022/04/04";
+        Reparacio instance = new Reparacio(codi, dataInici, dataFi);
+        Map<String, ArrayList> expResult = new HashMap<>();
+        expResult.put("mecanics", new ArrayList<Mecanic>());
+        expResult.put("recanvis", new ArrayList<Recanvi>());
         Map<String, ArrayList> result = instance.getElements();
         assertEquals(expResult, result);
     }
