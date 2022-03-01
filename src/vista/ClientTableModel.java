@@ -27,7 +27,7 @@ public class ClientTableModel extends AbstractTableModel{
         int totalClients = 0;
         
         for (int j = 0; j < ControladorPrincipal.getTallerActual().getComponents().size(); j++){
-            if (ControladorPrincipal.getTallerActual().getComponents().get(j) instanceof Recanvi) {
+            if (ControladorPrincipal.getTallerActual().getComponents().get(j) instanceof Client) {
                 totalClients++;
             }  
         }
@@ -59,7 +59,7 @@ public class ClientTableModel extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return data[0].length;
+        return columnNames.length;
     }
 
     @Override
