@@ -200,7 +200,11 @@ public class Taller implements Component, Serializable {
         //Seleccionem la posició que ocupa el component dins el vector de components
         // del taller
         for (int i = 0; i < components.size(); i++) {
-            if (components.get(i) instanceof Client && tipusComponent == 1) {
+            if (components.get(i) instanceof Vehicle && tipusComponent == 0) {
+                if (((Vehicle) components.get(i)).getMatricula().equals(id)) {
+                    return i;
+                }
+            } else if (components.get(i) instanceof Client && tipusComponent == 1) {
                 if (((Client) components.get(i)).getNif().equals(id)) {
                     return i;
                 }
