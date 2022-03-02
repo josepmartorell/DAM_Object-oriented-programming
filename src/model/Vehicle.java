@@ -55,6 +55,22 @@ public class Vehicle implements Component{
     public void setColor(String color) {
         this.color = color;
     }
+    
+    public static Vehicle addVehicle() {
+        String matricula, marca, model, color;
+
+        System.out.println("\nNIF del client o clienta:");
+        matricula = DADES.next();
+        DADES.nextLine(); //Neteja buffer
+        System.out.println("\nNom del client o clienta:");
+        marca = DADES.nextLine();
+        System.out.println("\nTelèfon del client o clienta:");
+        model = DADES.next();
+        System.out.println("\nCorreu electrònic del client o clienta:");
+        color = DADES.next();
+
+        return new Vehicle(matricula, marca, model, color);
+    }
 
     @Override
     public void updateComponent() {
