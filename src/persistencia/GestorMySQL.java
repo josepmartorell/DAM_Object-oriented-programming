@@ -9,6 +9,7 @@ import model.Client;
 import model.Mecanic;
 import model.Recanvi;
 import model.Taller;
+import model.Vehicle;
 import principal.Component;
 import principal.GestorTallerMecanicException;
 
@@ -97,6 +98,11 @@ public class GestorMySQL implements ProveedorPersistencia {
     private static String eliminaMecanicSQL = " DELETE FROM mecanics WHERE taller = ?";
 
     private PreparedStatement eliminaMecanicSt;
+    
+    
+    private static String eliminaVehicleSQL = " DELETE FROM vehicles WHERE taller = ?";
+
+    private PreparedStatement eliminaVehicleSt;
 
     /*
      * TODO
@@ -120,6 +126,12 @@ public class GestorMySQL implements ProveedorPersistencia {
     private static String insereixMecanicSQL = "INSERT INTO mecanics(nif, nom, telefon, correu, taller) VALUES (?, ?, ?, ?, ?)";
 
     private PreparedStatement insereixMecanicSt;
+    
+    
+    private static String insereixVehicleSQL = "INSERT INTO vehicles(matricula, marca, model, color, taller) VALUES (?, ?, ?, ?, ?)";
+
+    private PreparedStatement insereixVehicleSt;
+
 
     /*
      * TODO
@@ -144,6 +156,11 @@ public class GestorMySQL implements ProveedorPersistencia {
     private static String selMecanicsSQL = " SELECT * FROM mecanics WHERE taller = ?";
 
     private PreparedStatement selMecanicsSt;
+    
+    
+    private static String selVehiclesSQL = " SELECT * FROM vehicles WHERE taller = ?";
+
+    private PreparedStatement selVehiclesSt;
 
     /*
      *TODO
@@ -173,12 +190,15 @@ public class GestorMySQL implements ProveedorPersistencia {
             eliminaRecanviSt = conn.prepareStatement(eliminaRecanviSQL);
             eliminaClientSt = conn.prepareStatement(eliminaClientSQL);
             eliminaMecanicSt = conn.prepareStatement(eliminaMecanicSQL);
+            eliminaVehicleSt = conn.prepareStatement(eliminaVehicleSQL);
             insereixRecanviSt = conn.prepareStatement(insereixRecanviSQL);
             insereixClientSt = conn.prepareStatement(insereixClientSQL);
             insereixMecanicSt = conn.prepareStatement(insereixMecanicSQL);
+            insereixVehicleSt = conn.prepareStatement(insereixVehicleSQL);
             selRecanvisSt = conn.prepareStatement(selRecanvisSQL);
             selClientsSt = conn.prepareStatement(selClientsSQL);
             selMecanicsSt = conn.prepareStatement(selMecanicsSQL);
+            selVehiclesSt = conn.prepareStatement(selVehiclesSQL);
         } catch (SQLException e) {
             conn = null;
             System.out.println(e.getMessage());
@@ -242,6 +262,10 @@ public class GestorMySQL implements ProveedorPersistencia {
                 //Eliminem mecanics
                 eliminaMecanicSt.setString(1, taller.getCif());
                 eliminaMecanicSt.executeUpdate();
+                
+                //Eliminem vehicles
+                eliminaVehicleSt.setString(1, taller.getCif());
+                eliminaVehicleSt.executeUpdate();
 
             } else { //El taller no existeix
 
@@ -285,6 +309,18 @@ public class GestorMySQL implements ProveedorPersistencia {
                     insereixMecanicSt.setString(4, ((Mecanic) component).getCorreu());
                     insereixMecanicSt.setString(5, taller.getCif());
                     insereixMecanicSt.executeUpdate();
+                }
+            }
+            
+            //Insercio vehicles del taller
+            for (Component component : taller.getComponents()) {
+                if (component != null && component instanceof Vehicle) {
+                    insereixVehicleSt.setString(1, ((Vehicle) component).getMatricula());
+                    insereixVehicleSt.setString(2, ((Vehicle) component).getMarca());
+                    insereixVehicleSt.setString(3, ((Vehicle) component).getModel());
+                    insereixVehicleSt.setString(4, ((Vehicle) component).getColor());
+                    insereixVehicleSt.setString(5, taller.getCif());
+                    insereixVehicleSt.executeUpdate();
                 }
             }
 
@@ -354,6 +390,15 @@ public class GestorMySQL implements ProveedorPersistencia {
 
                 while (registresMecanics.next()) {
                     taller.addMecanic(new Mecanic(registresMecanics.getString("nif"), registresMecanics.getString("nom"), registresMecanics.getString("telefon"), registresMecanics.getString("correu")));
+                }
+                
+                //Seleccionem els vehicles de la taula vehicles i els afegim al taller
+                selVehiclesSt.setString(1, taller.getCif());
+
+                ResultSet registresVehicles = selVehiclesSt.executeQuery();
+
+                while (registresVehicles.next()) {
+                    taller.addVehicle(new Vehicle(registresVehicles.getString("matricula"), registresVehicles.getString("marca"), registresVehicles.getString("model"), registresVehicles.getString("color")));
                 }
 
             } else {

@@ -39,6 +39,9 @@ public class GestorTallerMecanicException extends Exception {
             case "9":
                 missatge = "Ja no hi caben més components";
                 break;
+            case "10":
+                missatge = "El vehícle ja existeix";
+                break;
             case "GestorXML.model":
                 missatge = "No s'ha pogut crear el model XML per desar el taller";
                 break;

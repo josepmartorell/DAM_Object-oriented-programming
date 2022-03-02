@@ -97,7 +97,21 @@ public class Taller implements Component, Serializable {
         System.out.println("\nNom del taller: " + nom);
         System.out.println("\nAdreça del taller: " + adreca);
     }
+    
 
+    public void addVehicle(Vehicle vehicle) throws GestorTallerMecanicException {
+
+        if (vehicle == null) {
+            vehicle = Vehicle.addVehicle();
+        }
+
+        if (selectComponent(0, vehicle .getMatricula()) == -1) {
+            components.add(vehicle);
+        } else {
+            throw new GestorTallerMecanicException("10");
+        }
+    }
+    
 
     public void addClient(Client client) throws GestorTallerMecanicException {
 
@@ -153,13 +167,17 @@ public class Taller implements Component, Serializable {
             throw new GestorTallerMecanicException("8");
         }
     }
-
+    
+    
     
     public int selectComponent(int tipusComponent, String id) {
 
         if (id == null) {
             //Demanem quin tipus de component vol seleccionar i el seu identificador (id)
             switch (tipusComponent) {
+                case 0:
+                    System.out.println("Matricula del vehicle?:");
+                    break;
                 case 1:
                     System.out.println("NIF del client o de la clienta?:");
                     break;
@@ -295,4 +313,6 @@ public class Taller implements Component, Serializable {
             System.out.println("\nNo existeix aquesta reparació");
         }
     }
+
+
 }
