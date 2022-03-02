@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import model.Client;
+import model.Mecanic;
 import model.Recanvi;
 import model.Taller;
 import principal.Component;
@@ -85,6 +87,16 @@ public class GestorMySQL implements ProveedorPersistencia {
     private static String eliminaRecanviSQL = " DELETE FROM recanvis WHERE taller = ?";
 
     private PreparedStatement eliminaRecanviSt;
+    
+    
+    private static String eliminaClientSQL = " DELETE FROM clients WHERE taller = ?";
+
+    private PreparedStatement eliminaClientSt;
+    
+    
+    private static String eliminaMecanicSQL = " DELETE FROM mecanics WHERE taller = ?";
+
+    private PreparedStatement eliminaMecanicSt;
 
     /*
      * TODO
@@ -98,6 +110,16 @@ public class GestorMySQL implements ProveedorPersistencia {
     private static String insereixRecanviSQL = "INSERT INTO recanvis(codi, nom, fabricant, preu, taller) VALUES (?, ?, ?, ?, ?)";
 
     private PreparedStatement insereixRecanviSt;
+    
+    
+    private static String insereixClientSQL = "INSERT INTO clients(nif, nom, telefon, correu, taller) VALUES (?, ?, ?, ?, ?)";
+
+    private PreparedStatement insereixClientSt;
+    
+    
+    private static String insereixMecanicSQL = "INSERT INTO mecanics(nif, nom, telefon, correu, taller) VALUES (?, ?, ?, ?, ?)";
+
+    private PreparedStatement insereixMecanicSt;
 
     /*
      * TODO
@@ -112,6 +134,16 @@ public class GestorMySQL implements ProveedorPersistencia {
     private static String selRecanvisSQL = " SELECT * FROM recanvis WHERE taller = ?";
 
     private PreparedStatement selRecanvisSt;
+    
+    
+    private static String selClientsSQL = " SELECT * FROM clients WHERE taller = ?";
+
+    private PreparedStatement selClientsSt;
+    
+    
+    private static String selMecanicsSQL = " SELECT * FROM mecanics WHERE taller = ?";
+
+    private PreparedStatement selMecanicsSt;
 
     /*
      *TODO
@@ -139,8 +171,14 @@ public class GestorMySQL implements ProveedorPersistencia {
             insereixTallerSt = conn.prepareStatement(insereixTallerSQL);
             actualitzaTallerSt = conn.prepareStatement(actualitzaTallerSQL);
             eliminaRecanviSt = conn.prepareStatement(eliminaRecanviSQL);
+            eliminaClientSt = conn.prepareStatement(eliminaClientSQL);
+            eliminaMecanicSt = conn.prepareStatement(eliminaMecanicSQL);
             insereixRecanviSt = conn.prepareStatement(insereixRecanviSQL);
+            insereixClientSt = conn.prepareStatement(insereixClientSQL);
+            insereixMecanicSt = conn.prepareStatement(insereixMecanicSQL);
             selRecanvisSt = conn.prepareStatement(selRecanvisSQL);
+            selClientsSt = conn.prepareStatement(selClientsSQL);
+            selMecanicsSt = conn.prepareStatement(selMecanicsSQL);
         } catch (SQLException e) {
             conn = null;
             System.out.println(e.getMessage());
@@ -196,6 +234,14 @@ public class GestorMySQL implements ProveedorPersistencia {
                 //Eliminem recanvis
                 eliminaRecanviSt.setString(1, taller.getCif());
                 eliminaRecanviSt.executeUpdate();
+                
+                //Eliminem clients
+                eliminaClientSt.setString(1, taller.getCif());
+                eliminaClientSt.executeUpdate();
+                
+                //Eliminem mecanics
+                eliminaMecanicSt.setString(1, taller.getCif());
+                eliminaMecanicSt.executeUpdate();
 
             } else { //El taller no existeix
 
@@ -215,6 +261,30 @@ public class GestorMySQL implements ProveedorPersistencia {
                     insereixRecanviSt.setDouble(4, ((Recanvi) component).getPreu());
                     insereixRecanviSt.setString(5, taller.getCif());
                     insereixRecanviSt.executeUpdate();
+                }
+            }
+            
+            //Insercio clients del taller
+            for (Component component : taller.getComponents()) {
+                if (component != null && component instanceof Client) {
+                    insereixClientSt.setString(1, ((Client) component).getNif());
+                    insereixClientSt.setString(2, ((Client) component).getNom());
+                    insereixClientSt.setString(3, ((Client) component).getTelefon());
+                    insereixClientSt.setString(4, ((Client) component).getCorreu());
+                    insereixClientSt.setString(5, taller.getCif());
+                    insereixClientSt.executeUpdate();
+                }
+            }
+            
+            //Insercio mecanics del taller
+            for (Component component : taller.getComponents()) {
+                if (component != null && component instanceof Mecanic) {
+                    insereixMecanicSt.setString(1, ((Mecanic) component).getNif());
+                    insereixMecanicSt.setString(2, ((Mecanic) component).getNom());
+                    insereixMecanicSt.setString(3, ((Mecanic) component).getTelefon());
+                    insereixMecanicSt.setString(4, ((Mecanic) component).getCorreu());
+                    insereixMecanicSt.setString(5, taller.getCif());
+                    insereixMecanicSt.executeUpdate();
                 }
             }
 
@@ -266,6 +336,24 @@ public class GestorMySQL implements ProveedorPersistencia {
 
                 while (registresRecanvis.next()) {
                     taller.addRecanvi(new Recanvi(registresRecanvis.getString("codi"), registresRecanvis.getString("nom"), registresRecanvis.getString("fabricant"), registresRecanvis.getDouble("preu")));
+                }
+                
+                //Seleccionem els clients de la taula clients i els afegim al taller
+                selClientsSt.setString(1, taller.getCif());
+
+                ResultSet registresClients = selClientsSt.executeQuery();
+
+                while (registresClients.next()) {
+                    taller.addClient(new Client(registresClients.getString("nif"), registresClients.getString("nom"), registresClients.getString("telefon"), registresClients.getString("correu")));
+                }
+                
+                //Seleccionem els mecanics de la taula mecanics i els afegim al taller
+                selMecanicsSt.setString(1, taller.getCif());
+
+                ResultSet registresMecanics = selMecanicsSt.executeQuery();
+
+                while (registresMecanics.next()) {
+                    taller.addMecanic(new Mecanic(registresMecanics.getString("nif"), registresMecanics.getString("nom"), registresMecanics.getString("telefon"), registresMecanics.getString("correu")));
                 }
 
             } else {
