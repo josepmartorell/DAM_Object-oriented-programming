@@ -26,7 +26,8 @@ public class Reparacio implements Component{
     private String dataInici;
     private String dataFi;
     private double preu;
-    private Client client; 
+    private Client client;
+    private Vehicle vehicle;
     private Map<String, ArrayList> elements = new HashMap();
 
     public Reparacio(String codi, String dataInici, String dataFi) {
@@ -77,6 +78,14 @@ public class Reparacio implements Component{
         this.client = client;
     }
 
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
+    
     public Map<String, ArrayList> getElements() {
         return elements;
     }
