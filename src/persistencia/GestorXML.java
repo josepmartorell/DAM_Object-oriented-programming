@@ -18,6 +18,7 @@ import org.w3c.dom.NodeList;
 import principal.GestorTallerMecanicException;
 import model.Reparacio;
 import model.Taller;
+import model.Vehicle;
 
 /**
  *
@@ -102,6 +103,17 @@ public class GestorXML implements ProveedorPersistencia {
                 fill.setAttribute("correu", ((Client) taller.getComponents().get(i)).getCorreu());
 
                 arrel.appendChild(fill);
+                
+            } else if (taller.getComponents().get(i) instanceof Vehicle) {
+
+                fill = doc.createElement("vehicle");
+
+                fill.setAttribute("matricula", ((Vehicle) taller.getComponents().get(i)).getMatricula());
+                fill.setAttribute("marca", ((Vehicle) taller.getComponents().get(i)).getMarca());
+                fill.setAttribute("model", ((Vehicle) taller.getComponents().get(i)).getModel());
+                fill.setAttribute("color", ((Vehicle) taller.getComponents().get(i)).getColor());
+
+                arrel.appendChild(fill);
 
             } else if (taller.getComponents().get(i) instanceof Mecanic) {
 
@@ -145,6 +157,14 @@ public class GestorXML implements ProveedorPersistencia {
                 net.setAttribute("nom", ((Client) ((Reparacio) taller.getComponents().get(i)).getClient()).getNom());
                 net.setAttribute("telefon", ((Client) ((Reparacio) taller.getComponents().get(i)).getClient()).getTelefon());
                 net.setAttribute("correu", ((Client) ((Reparacio) taller.getComponents().get(i)).getClient()).getCorreu());
+
+                fill.appendChild(net);
+                
+                net = doc.createElement("vehicle");
+                net.setAttribute("matricula", ((Vehicle) taller.getComponents().get(i)).getMatricula());
+                net.setAttribute("marca", ((Vehicle) taller.getComponents().get(i)).getMarca());
+                net.setAttribute("model", ((Vehicle) taller.getComponents().get(i)).getModel());
+                net.setAttribute("color", ((Vehicle) taller.getComponents().get(i)).getColor());
 
                 fill.appendChild(net);
 
@@ -258,6 +278,15 @@ public class GestorXML implements ProveedorPersistencia {
                     String correu = ((Element) fill).getAttribute("correu");
                     
                     taller.addClient(new Client(nif, nom, correu, telefon));
+                    
+                } else if (component.equals("vehicle")) {
+                    
+                    String matricula = ((Element) fill).getAttribute("matricula");
+                    String marca = ((Element) fill).getAttribute("marca");
+                    String model = ((Element) fill).getAttribute("model");
+                    String color = ((Element) fill).getAttribute("color");
+                    
+                    taller.addVehicle(new Vehicle(matricula, marca, model, color));
 
                 } else if (component.equals("mecanic")) {
                     
@@ -307,6 +336,9 @@ public class GestorXML implements ProveedorPersistencia {
                             component = net.getNodeName();
 
                             switch (component) {
+                                case "vehicle":
+                                    novaReparacio.setVehicle((Vehicle) taller.getComponents().get(taller.selectComponent(0, ((Element) net).getAttribute("matricula"))));
+                                    break;
                                 case "client":
                                     novaReparacio.setClient((Client) taller.getComponents().get(taller.selectComponent(1, ((Element) net).getAttribute("nif"))));
                                     break;

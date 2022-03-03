@@ -225,6 +225,29 @@ public class Taller implements Component, Serializable {
 
         return posElement;
     }
+    
+    public void addVehicleReparacio() {
+
+        Reparacio reparacioSel;
+        int pos = selectComponent(4, null);
+
+        if (pos >= 0) {
+
+            reparacioSel = (Reparacio)this.getComponents().get(pos);
+
+            pos = selectComponent(0, null);
+
+            if (pos >= 0) {
+                reparacioSel.setVehicle((Vehicle)this.getComponents().get(pos));
+            } else {
+                System.out.println("\nNo existeix aquest vehicle");
+            }
+
+        } else {
+            System.out.println("\nNo existeix aquesta reparació");
+        }
+
+    }
 
     public void addClientReparacio() {
 
