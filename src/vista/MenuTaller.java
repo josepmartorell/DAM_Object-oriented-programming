@@ -12,7 +12,7 @@ public class MenuTaller {
 
     private JFrame frame;
 
-    private JButton[] menuButtons = new JButton[6];
+    private JButton[] menuButtons = new JButton[7];
 
     private final int AMPLADA = 800;
     private final int ALCADA = 600;
@@ -48,9 +48,10 @@ public class MenuTaller {
         menuButtons[0] = new JButton("0. Sortir");
         menuButtons[1] = new JButton("1. Alta Taller");
         menuButtons[2] = new JButton("2. Seleccionar Taller");
-        menuButtons[3] = new JButton("3. Llistar Tallers");
-        menuButtons[4] = new JButton("4. Carregar Taller");
-        menuButtons[5] = new JButton("5. Desar Taller");
+        menuButtons[3] = new JButton("3. Modificar Tallers");
+        menuButtons[4] = new JButton("4. Llistar Tallers");
+        menuButtons[5] = new JButton("5. Carregar Taller");
+        menuButtons[6] = new JButton("6. Desar Taller");
 
         //Addició dels botons a la finestra
         for (JButton boto : menuButtons) {
