@@ -12,6 +12,7 @@ import principal.GestorTallerMecanicException;
 import vista.TallerForm;
 import vista.TallerLlista;
 import vista.MenuTaller;
+import vista.UpdateForm;
 
 /**
  *
@@ -21,6 +22,7 @@ public class ControladorTaller implements ActionListener {
 
     private MenuTaller menuTaller;
     private TallerForm tallerForm = null;
+    private UpdateForm updateForm = null;
     private TallerLlista tallerLlista = null;
     private int opcioSelec = 0;
 
@@ -66,6 +68,20 @@ public class ControladorTaller implements ActionListener {
         
         tallerForm.getDesar().addActionListener(this);
         tallerForm.getSortir().addActionListener(this);
+
+    }
+    
+        //S'AFEGEIX EL CONTROLADOR COM A LISTENER DELS BOTONS DESAR i SORTIR DEL FORMULARI
+    private void afegirListenersUpdateForm() {
+        /*
+        TODO
+        
+        A cada botó del formulari del taller, s'afegeix aquest mateix objecte (ControladorTaller) com a listener
+        
+         */
+        
+        updateForm.getDesar().addActionListener(this);
+        updateForm.getSortir().addActionListener(this);
 
     }
 
@@ -154,6 +170,31 @@ public class ControladorTaller implements ActionListener {
             }
 
         }
+        
+                //Accions per al formulari per a modificar tallers
+        if (updateForm != null) {
+
+            if (e.getSource() == updateForm.getDesar()) {
+
+                if (opcioSelec == 3) {//Modificar taller
+                    String cif = updateForm.gettCif().getText();
+                    String nom = updateForm.gettNom().getText();
+                    String adreca = updateForm.gettAdreca().getText();
+                    ControladorPrincipal.getTallerActual().setCif(cif);
+                    ControladorPrincipal.getTallerActual().setNom(nom);
+                    ControladorPrincipal.getTallerActual().setAdreca(adreca);
+                    //opcioSelec = 2;
+
+                }
+
+            } else if (e.getSource() == updateForm.getSortir()) { //Sortir
+
+               updateForm.getFrame().setVisible(false);
+                menuTaller.getFrame().setVisible(true);
+
+            }
+
+        }
 
         if (tallerLlista != null) {
 
@@ -191,11 +232,21 @@ public class ControladorTaller implements ActionListener {
                 if (ControladorPrincipal.getTallers()[0] != null) {
                     seleccionarTaller();
                 } else {
-                    JOptionPane.showMessageDialog(menuTaller.getFrame(), "Abans s'ha de crear al menys un taller");
+                    JOptionPane.showMessageDialog(menuTaller.getFrame(), "Abans s'ha de carregar al menys un taller");
+                }
+                break;
+                
+            case 3: // modificar
+                if (ControladorPrincipal.getTallerActual() != null) {
+                    updateForm = new UpdateForm();
+                    afegirListenersUpdateForm();
+                } else {
+                    menuTaller.getFrame().setVisible(true);
+                    JOptionPane.showMessageDialog(menuTaller.getFrame(), "Abans s'ha de seleccionar el taller a modificar");
                 }
                 break;
 
-            case 3: // llistar
+            case 4: // llistar
                 if (ControladorPrincipal.getTallers()[0] != null) {
                     tallerLlista = new TallerLlista();
                     afegirListenersLlista();
@@ -205,7 +256,7 @@ public class ControladorTaller implements ActionListener {
                 }
                 break;
 
-            case 4: //carregar
+            case 5: //carregar
                 
                 menuTaller.getFrame().setVisible(true);
                 
@@ -258,7 +309,7 @@ public class ControladorTaller implements ActionListener {
                 
                 break;
 
-            case 5: //desar
+            case 6: //desar
                 /*
                 TODO
                 
