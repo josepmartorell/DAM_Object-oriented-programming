@@ -104,16 +104,24 @@ public class ControladorClients implements ActionListener {
 
             if (e.getSource() == updateForm.getDesar()) {
 
-                /*if (opcioSelec == 3) {//Modificar taller
+                if (opcioSelec == 3) {//Modificar taller
                     String nif = updateForm.gettNif().getText();
                     String nom = updateForm.gettNom().getText();
                     String telefon = updateForm.gettTelefon().getText();
                     String correu = updateForm.gettCorreu().getText();
-                    ControladorPrincipal.getTallerActual().getComponents().get(pointer).setNif(nif);
-                    ControladorPrincipal.getTallerActual().getComponents().get(pointer).setNom(nom);
-                    ControladorPrincipal.getTallerActual().getComponents().get(pointer).setTelefon(telefon);
-                    ControladorPrincipal.getTallerActual().getComponents().get(pointer).setCorreu(correu);}
-                    //opcioSelec = 2;*/
+                    int i = 0; 
+                    for (Component component: ControladorPrincipal.getTallerActual().getComponents()){
+                        if (component instanceof Client){
+                            if(((Client) component).getNif().equals(input)){
+                                ((Client)component).setNif(nif);
+                                ((Client)component).setNom(nom);
+                                ((Client)component).setTelefon(telefon);
+                                ((Client)component).setCorreu(correu);
+                            }
+                            i++;      
+                        }
+                    }
+                }     //opcioSelec = 2;
 
             } else if (e.getSource() == updateForm.getSortir()) { //Sortir
 
