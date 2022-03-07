@@ -29,28 +29,17 @@ public class UpdateForm {
     private JTextField tNom;
     private JLabel lAdreca;
     private JTextField tAdreca;
+    private JLabel lNif;
+    private JTextField tNif;
+    private JLabel lTelefon;
+    private JTextField tTelefon;
+    private JLabel lCorreu;
+    private JTextField tCorreu;
 
     private JButton desar;   
     private JButton sortir;   
 
     public UpdateForm() {
-        /*
-        TODO
-        
-        Amb els atributs d'aquesta classe, heu de fer el següent (no afegiu cap listener a cap control):
-            
-            - Heu de crear l'objecte JFrame amb títol "Formulari Taller" i layout Grid d'una columna
-        
-            - Heu de crear els controls del formulari (labels i textFields).
-        
-            - Heu de crear els botons del formulari
-        
-            - Heu d'afegir-ho tot al frame
-        
-            - Heu de fer visible el frame amb l'amplada i alçada de les constants AMPLADA i ALCADA, i fer que la finestra es tanqui 
-            quan l'usuari ho fa amb el control "X" de la finestra. Per fer tot això, heu de cridar al mètode showFinestra() d'aquesta
-            classe.       
-        */
         
         //Definició de la finestra del menú
         frame = new JFrame("Modificar Taller");
@@ -87,7 +76,52 @@ public class UpdateForm {
         this();
         tCif.setText(cif);
         tNom.setText(nom);
-        tNom.setText(adreca);
+        tAdreca.setText(adreca);
+    }
+    
+    //TODO
+    public UpdateForm(String object, String VAR1, String VAR2, String VAR3, String VAR4) {
+        
+        //Definició de la finestra del menú
+        frame = new JFrame("Modificar " + object);
+        frame.setLayout(new GridLayout(0, 1));
+
+        //Creació dels controls del formulari
+        lNif = new JLabel("NIF");
+        tNif = new JTextField(VAR1);
+        tNif.setEditable(false);
+        tNif.setBackground(Color.white);
+        lNom = new JLabel("Nom");
+        tNom = new JTextField(VAR2);
+        lTelefon = new JLabel("Telefon");
+        tTelefon = new JTextField(VAR3);
+        lCorreu = new JLabel("Correu");
+        tCorreu = new JTextField(VAR4);
+
+        //Creació dels botons del formulari
+        desar = new JButton("Desar");
+        sortir = new JButton("Sortir");
+
+        //Addició del tot el formulari a la finestra
+        frame.add(lNif);
+        frame.add(tNif);
+        frame.add(lNom);
+        frame.add(tNom);
+        frame.add(lTelefon);
+        frame.add(tTelefon);
+        frame.add(lCorreu);
+        frame.add(tCorreu);
+        frame.add(desar);       
+        frame.add(sortir);
+
+        showFinestra();
+    }
+    
+    public UpdateForm(String nif, String nom, String telefon, String correu){
+        tCif.setText(nif);
+        tNom.setText(nom);
+        tNom.setText(telefon);
+        tNom.setText(correu);
     }
     
     private void showFinestra(){
@@ -151,7 +185,55 @@ public class UpdateForm {
 
     public void settAdreca(JTextField tAdreca) {
         this.tAdreca = tAdreca;
-    }   
+    }
+
+    public JLabel getlNif() {
+        return lNif;
+    }
+
+    public void setlNif(JLabel lNif) {
+        this.lNif = lNif;
+    }
+
+    public JTextField gettNif() {
+        return tNif;
+    }
+
+    public void settNif(JTextField tNif) {
+        this.tNif = tNif;
+    }
+
+    public JLabel getlTelefon() {
+        return lTelefon;
+    }
+
+    public void setlTelefon(JLabel lTelefon) {
+        this.lTelefon = lTelefon;
+    }
+
+    public JTextField gettTelefon() {
+        return tTelefon;
+    }
+
+    public void settTelefon(JTextField tTelefon) {
+        this.tTelefon = tTelefon;
+    }
+
+    public JLabel getlCorreu() {
+        return lCorreu;
+    }
+
+    public void setlCorreu(JLabel lCorreu) {
+        this.lCorreu = lCorreu;
+    }
+
+    public JTextField gettCorreu() {
+        return tCorreu;
+    }
+
+    public void settCorreu(JTextField tCorreu) {
+        this.tCorreu = tCorreu;
+    }
 
     public JButton getDesar() {
         return desar;
@@ -167,6 +249,8 @@ public class UpdateForm {
 
     public void setSortir(JButton sortir) {
         this.sortir = sortir;
-    } 
+    }
+
+    
     
 }
