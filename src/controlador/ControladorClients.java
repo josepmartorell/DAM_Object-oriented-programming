@@ -109,7 +109,6 @@ public class ControladorClients implements ActionListener {
                     String nom = updateForm.gettNom().getText();
                     String telefon = updateForm.gettTelefon().getText();
                     String correu = updateForm.gettCorreu().getText();
-                    int i = 0; 
                     for (Component component: ControladorPrincipal.getTallerActual().getComponents()){
                         if (component instanceof Client){
                             if(((Client) component).getNif().equals(input)){
@@ -117,8 +116,7 @@ public class ControladorClients implements ActionListener {
                                 ((Client)component).setNom(nom);
                                 ((Client)component).setTelefon(telefon);
                                 ((Client)component).setCorreu(correu);
-                            }
-                            i++;      
+                            }     
                         }
                     }
                 }     //opcioSelec = 2;
