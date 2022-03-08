@@ -10,8 +10,10 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import model.Vehicle;
 import persistencia.GestorPersistencia;
+import principal.Component;
 import principal.GestorTallerMecanicException;
 import vista.MenuVehicles;
+import vista.UpdateVehicleForm;
 import vista.VehicleForm;
 import vista.VehicleLlista;
 
@@ -23,8 +25,14 @@ public class ControladorVehicles implements ActionListener{
     
     private MenuVehicles menuVehicles;
     private VehicleForm vehicleForm = null;
+    private UpdateVehicleForm updateVehicleForm = null;
     private VehicleLlista vehicleLlista = null;
     private int opcioSelec = 0;
+    private String input;
+    private String VAR1;
+    private String VAR2;
+    private String VAR3;
+    private String VAR4;
 
     public ControladorVehicles() {
         
@@ -45,6 +53,13 @@ public class ControladorVehicles implements ActionListener{
 
         vehicleForm.getDesar().addActionListener(this);
         vehicleForm.getSortir().addActionListener(this);
+
+    }
+    
+    private void afegirListenersUpdateForm() {
+
+        updateVehicleForm.getDesar().addActionListener(this);
+        updateVehicleForm.getSortir().addActionListener(this);
 
     }
 
@@ -68,7 +83,7 @@ public class ControladorVehicles implements ActionListener{
             }
         }
 
-        //Accions per al formulari de recanvis
+        //Accions per al formulari de vehicles
         if (vehicleForm != null) {
 
             if (e.getSource() == vehicleForm.getDesar()) {
@@ -83,6 +98,37 @@ public class ControladorVehicles implements ActionListener{
 
                 vehicleForm.getFrame().setVisible(false);
                 menuVehicles.getFrame().setVisible(true);
+
+            }
+
+        }
+        
+        //Accions per al formulari per a modificar vehicles
+        if (updateVehicleForm != null) {
+
+            if (e.getSource() == updateVehicleForm.getDesar()) {
+
+                if (opcioSelec == 3) {//Modificar mecanic
+                    String matricula = updateVehicleForm.gettMatricula().getText();
+                    String marca = updateVehicleForm.gettMarca().getText();
+                    String model = updateVehicleForm.gettModel().getText();
+                    String color = updateVehicleForm.gettColor().getText();
+                    for (Component component: ControladorPrincipal.getTallerActual().getComponents()){
+                        if (component instanceof Vehicle){
+                            if(((Vehicle) component).getMatricula().equals(input)){
+                                ((Vehicle)component).setMatricula(matricula);
+                                ((Vehicle)component).setMarca(marca);
+                                ((Vehicle)component).setModel(model);
+                                ((Vehicle)component).setColor(color);
+                            }    
+                        }
+                    }
+                }     
+
+            } else if (e.getSource() == updateVehicleForm.getSortir()) { //Sortir
+
+               updateVehicleForm.getFrame().setVisible(false);
+               menuVehicles.getFrame().setVisible(true);
 
             }
 
@@ -126,7 +172,46 @@ public class ControladorVehicles implements ActionListener{
                 }
 
                 break;
-            case 3: //desar
+            case 3: // modificar
+                int i = 0;      
+                int totalVehicles = 0;
+                int pointer = 0;
+                
+                input = JOptionPane.showInputDialog("Introdueixi la matricula del vehicle que es vol modificar:");
+
+                for (int j = 0; j < ControladorPrincipal.getTallerActual().getComponents().size(); j++){
+                    if (ControladorPrincipal.getTallerActual().getComponents().get(j) instanceof Vehicle) {
+                        totalVehicles++;
+                    }  
+                }
+
+                String[][] data = new String[totalVehicles][4];
+                for (Component component: ControladorPrincipal.getTallerActual().getComponents()){
+                    if (component instanceof Vehicle){
+                        if(((Vehicle) component).getMatricula().equals(input)){
+                            data[i][0] = ((Vehicle)component).getMatricula();
+                            data[i][1] = ((Vehicle)component).getMarca();
+                            data[i][2] = ((Vehicle)component).getModel();
+                            data[i][3] = ((Vehicle)component).getColor();
+                            pointer = i;
+                        }
+                        i++;      
+                    }
+                }
+                this.VAR1 = data[pointer][0];
+                this.VAR2 = data[pointer][1];
+                this.VAR3 = data[pointer][2];
+                this.VAR4 = data[pointer][3];
+
+                if (ControladorPrincipal.getTallerActual() != null) {
+                    updateVehicleForm = new UpdateVehicleForm("Vehicle", VAR1, VAR2, VAR3, VAR4);
+                    afegirListenersUpdateForm();
+                } else {
+                    menuVehicles.getFrame().setVisible(true);
+                    JOptionPane.showMessageDialog(menuVehicles.getFrame(), "Abans s'ha de seleccionar el taller a modificar");
+                }
+                break;     
+            case 4: //desar
                 /*
                 TODO
                 

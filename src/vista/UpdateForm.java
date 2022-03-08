@@ -18,7 +18,7 @@ import javax.swing.JTextField;
  */
 public class UpdateForm {
     
-        private JFrame frame;
+    private JFrame frame;
     
     private final int AMPLADA = 300;
     private final int ALCADA = 200;
@@ -118,10 +118,10 @@ public class UpdateForm {
     }
     
     public UpdateForm(String nif, String nom, String telefon, String correu){
-        tCif.setText(nif);
+        tNif.setText(nif);
         tNom.setText(nom);
-        tNom.setText(telefon);
-        tNom.setText(correu);
+        tTelefon.setText(telefon);
+        tCorreu.setText(correu);
     }
     
     private void showFinestra(){

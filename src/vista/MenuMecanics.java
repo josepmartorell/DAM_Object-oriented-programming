@@ -16,7 +16,7 @@ public class MenuMecanics {
     
     private JFrame frame;
 
-    private JButton[] menuButtons = new JButton[4];
+    private JButton[] menuButtons = new JButton[5];
 
     private final int AMPLADA = 800;
     private final int ALCADA = 600;
@@ -31,7 +31,8 @@ public class MenuMecanics {
         menuButtons[0] = new JButton("0. Sortir");
         menuButtons[1] = new JButton("1. Alta Mecanic");
         menuButtons[2] = new JButton("2. Llistar Mecanics");
-        menuButtons[3] = new JButton("3. Desar Mecanic");
+        menuButtons[3] = new JButton("3. Modificar Mecanics");
+        menuButtons[4] = new JButton("4. Desar Mecanic");
         
         //Addició dels botons a la finestra
         for (JButton boto : menuButtons) {
