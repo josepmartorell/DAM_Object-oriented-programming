@@ -108,7 +108,7 @@ public class ControladorVehicles implements ActionListener{
 
             if (e.getSource() == updateVehicleForm.getDesar()) {
 
-                if (opcioSelec == 3) {//Modificar mecanic
+                if (opcioSelec == 3) {//Modificar vehicle
                     String matricula = updateVehicleForm.gettMatricula().getText();
                     String marca = updateVehicleForm.gettMarca().getText();
                     String model = updateVehicleForm.gettModel().getText();

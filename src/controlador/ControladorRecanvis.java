@@ -6,21 +6,29 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import model.Recanvi;
 import persistencia.GestorPersistencia;
+import principal.Component;
 import principal.GestorTallerMecanicException;
 import vista.MenuRecanvis;
 import vista.RecanviForm;
 import vista.RecanviLlista;
+import vista.UpdateRecanviForm;
 
 /**
  *
- * @author fta
+ * @author jtech
  */
 public class ControladorRecanvis implements ActionListener {
 
     private MenuRecanvis menuRecanvis;
     private RecanviForm recanviForm = null;
+    private UpdateRecanviForm updateRecanviForm = null;
     private RecanviLlista recanviLlista = null;
     private int opcioSelec = 0;
+    private String input;
+    private String VAR1;
+    private String VAR2;
+    private String VAR3;
+    private String VAR4;
 
     public ControladorRecanvis() {
 
@@ -41,6 +49,13 @@ public class ControladorRecanvis implements ActionListener {
 
         recanviForm.getDesar().addActionListener(this);
         recanviForm.getSortir().addActionListener(this);
+
+    }
+    
+    private void afegirListenersUpdateForm() {
+
+        updateRecanviForm.getDesar().addActionListener(this);
+        updateRecanviForm.getSortir().addActionListener(this);
 
     }
 
@@ -64,7 +79,7 @@ public class ControladorRecanvis implements ActionListener {
             }
         }
 
-        //Accions per al formulari de mestres
+        //Accions per al formulari de recanvis
         if (recanviForm != null) {
 
             if (e.getSource() == recanviForm.getDesar()) {
@@ -79,6 +94,37 @@ public class ControladorRecanvis implements ActionListener {
 
                 recanviForm.getFrame().setVisible(false);
                 menuRecanvis.getFrame().setVisible(true);
+
+            }
+
+        }
+        
+        //Accions per al formulari per a modificar recanvis
+        if (updateRecanviForm != null) {
+
+            if (e.getSource() == updateRecanviForm.getDesar()) {
+
+                if (opcioSelec == 3) {//Modificar recanvi
+                    String codi = updateRecanviForm.gettCodi().getText();
+                    String nom = updateRecanviForm.gettNom().getText();
+                    String fabricant = updateRecanviForm.gettFabricant().getText();
+                    double preu = Double.parseDouble(updateRecanviForm.gettPreu().getText());
+                    for (Component component: ControladorPrincipal.getTallerActual().getComponents()){
+                        if (component instanceof Recanvi){
+                            if(((Recanvi) component).getCodi().equals(input)){
+                                ((Recanvi)component).setCodi(codi);
+                                ((Recanvi)component).setNom(nom);
+                                ((Recanvi)component).setFabricant(fabricant);
+                                ((Recanvi)component).setPreu(preu);
+                            }    
+                        }
+                    }
+                }     
+
+            } else if (e.getSource() == updateRecanviForm.getSortir()) { //Sortir
+
+               updateRecanviForm.getFrame().setVisible(false);
+               menuRecanvis.getFrame().setVisible(true);
 
             }
 
@@ -104,8 +150,7 @@ public class ControladorRecanvis implements ActionListener {
                 ControladorPrincipal.getMenuPrincipal().getFrame().setVisible(true);
                 break;
             case 1: // alta
-                  //if (ControladorPrincipal.getTallers()[0] != null) {
-                  if (ControladorPrincipal.getTallerActual() != null) {//substitute
+                  if (ControladorPrincipal.getTallerActual() != null) {
                     recanviForm = new RecanviForm();
                     afegirListenersForm();
                 } else {
@@ -114,18 +159,56 @@ public class ControladorRecanvis implements ActionListener {
                 }
                 break;
             case 2: // llista
-                //if (ControladorPrincipal.getTallers()[0] != null) {
-                if (ControladorPrincipal.getTallerActual() != null) {//substitute
+                if (ControladorPrincipal.getTallerActual() != null) {
                     recanviLlista = new RecanviLlista();
                     afegirListenersLlista();
                 } else {
                     menuRecanvis.getFrame().setVisible(true);
                     JOptionPane.showMessageDialog(menuRecanvis.getFrame(), "Abans s'ha de crear al menys un taller en el menú de tallers.");
                 }
-
                 break;
+            case 3: // modificar
+                int i = 0;      
+                int totalRecanvis = 0;
+                int pointer = 0;
                 
-            case 3: //desar
+                input = JOptionPane.showInputDialog("Introdueixi el codi del recanvi que es vol modificar:");
+
+                for (int j = 0; j < ControladorPrincipal.getTallerActual().getComponents().size(); j++){
+                    if (ControladorPrincipal.getTallerActual().getComponents().get(j) instanceof Recanvi) {
+                        totalRecanvis++;
+                    }  
+                }
+
+                String[][] data = new String[totalRecanvis][4];
+                for (Component component: ControladorPrincipal.getTallerActual().getComponents()){
+                    if (component instanceof Recanvi){
+                        if(((Recanvi) component).getCodi().equals(input)){
+                            data[i][0] = ((Recanvi)component).getCodi();
+                            data[i][1] = ((Recanvi)component).getNom();
+                            data[i][2] = ((Recanvi)component).getFabricant();
+                            data[i][3] = String.valueOf(((Recanvi)component).getPreu());
+
+                            pointer = i;
+                        }
+                        i++;      
+                    }
+                }
+                this.VAR1 = data[pointer][0];
+                this.VAR2 = data[pointer][1];
+                this.VAR3 = data[pointer][2];
+                this.VAR4 = data[pointer][3];
+
+                if (ControladorPrincipal.getTallerActual() != null) {
+                    updateRecanviForm = new UpdateRecanviForm("Vehicle", VAR1, VAR2, VAR3, VAR4);
+                    afegirListenersUpdateForm();
+                } else {
+                    menuRecanvis.getFrame().setVisible(true);
+                    JOptionPane.showMessageDialog(menuRecanvis.getFrame(), "Abans s'ha de seleccionar el taller a modificar");
+                }
+                break; 
+                
+            case 4: //desar
                 /*
                 TODO
                 
