@@ -16,7 +16,7 @@ public class MenuVehicles {
     
     private JFrame frame;
 
-    private JButton[] menuButtons = new JButton[5];
+    private JButton[] menuButtons = new JButton[6];
 
     private final int AMPLADA = 800;
     private final int ALCADA = 600;
@@ -32,7 +32,8 @@ public class MenuVehicles {
         menuButtons[1] = new JButton("1. Alta Vehicle");
         menuButtons[2] = new JButton("2. Llistar Vehicles");
         menuButtons[3] = new JButton("3. Modificar Vehicles");
-        menuButtons[4] = new JButton("4. Desar Vehicle");
+        menuButtons[4] = new JButton("4. Eliminar Vehicles");
+        menuButtons[5] = new JButton("5. Desar Vehicle");
         
         //Addició dels botons a la finestra
         for (JButton boto : menuButtons) {
