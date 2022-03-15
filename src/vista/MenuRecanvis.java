@@ -12,7 +12,7 @@ public class MenuRecanvis {
 
     private JFrame frame;
 
-    private JButton[] menuButtons = new JButton[5];
+    private JButton[] menuButtons = new JButton[6];
 
     private final int AMPLADA = 800;
     private final int ALCADA = 600;
@@ -28,7 +28,8 @@ public class MenuRecanvis {
         menuButtons[1] = new JButton("1. Alta Recanvi");
         menuButtons[2] = new JButton("2. Llistar Recanvis");
         menuButtons[3] = new JButton("3. Modificar Recanvis");
-        menuButtons[4] = new JButton("4. Desar Recanvi");
+        menuButtons[4] = new JButton("4. Eliminar Recanvis");
+        menuButtons[5] = new JButton("5. Desar Recanvi");
         
         //Addició dels botons a la finestra
         for (JButton boto : menuButtons) {

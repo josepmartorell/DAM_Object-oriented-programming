@@ -119,7 +119,7 @@ public class ControladorClients implements ActionListener {
                             }     
                         }
                     }
-                }     //opcioSelec = 2;
+                }    
 
             } else if (e.getSource() == updateForm.getSortir()) { //Sortir
 
@@ -152,8 +152,7 @@ public class ControladorClients implements ActionListener {
                 ControladorPrincipal.getMenuPrincipal().getFrame().setVisible(true);
                 break;
             case 1: // alta
-                  //if (ControladorPrincipal.getTallers()[0] != null) {
-                  if (ControladorPrincipal.getTallerActual() != null) {//substitute
+                  if (ControladorPrincipal.getTallerActual() != null) {
                     clientForm = new ClientForm();
                     afegirListenersForm();
                 } else {
@@ -162,8 +161,7 @@ public class ControladorClients implements ActionListener {
                 }
                 break;
             case 2: // llista
-                //if (ControladorPrincipal.getTallers()[0] != null) {
-                if (ControladorPrincipal.getTallerActual() != null) {//substitute
+                if (ControladorPrincipal.getTallerActual() != null) {
                     clientLlista = new ClientLlista();
                     afegirListenersLlista();
                 } else {
@@ -211,8 +209,28 @@ public class ControladorClients implements ActionListener {
                     JOptionPane.showMessageDialog(menuClients.getFrame(), "Abans s'ha de seleccionar el taller a modificar");
                 }
                 break;
+            case 4: // eliminar 
+                /* 1-pedimos el nif del cliente a borrar y lo almacenamos en la variable input
+                   2-recorremos el arraylist hasta encontrar el elemento coincidente y almacenamos la posicion en index 
+                   3-fuera del ciclo for eliminamos el comoponente del arraylist con el método remove(int index) de la misma clase arraylist 
+                */   
+                int index = 0;
                 
-            case 4: //desar
+                input = JOptionPane.showInputDialog("Introdueixi el nif del client que es vol eliminar:");
+
+                for (int j = 0; j < ControladorPrincipal.getTallerActual().getComponents().size(); j++){
+                    if (ControladorPrincipal.getTallerActual().getComponents().get(j) instanceof Client) {
+                        if(((Client) ControladorPrincipal.getTallerActual().getComponents().get(j)).getNif().equals(input)){
+                            index = j;
+                        }
+                        
+                        
+                    }  
+                }
+                ControladorPrincipal.getTallerActual().getComponents().remove(index);
+                menuClients.getFrame().setVisible(true);
+                break;             
+            case 5: //desar
                 /*
                 TODO
                 

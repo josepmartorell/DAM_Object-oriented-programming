@@ -8,7 +8,7 @@ import static principal.Component.DADES;
 
 /**
  *
- * @author fta
+ * @author jtech
  */
 public class Client extends Persona {
 

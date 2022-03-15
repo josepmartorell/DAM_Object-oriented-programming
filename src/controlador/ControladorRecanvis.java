@@ -207,8 +207,28 @@ public class ControladorRecanvis implements ActionListener {
                     JOptionPane.showMessageDialog(menuRecanvis.getFrame(), "Abans s'ha de seleccionar el taller a modificar");
                 }
                 break; 
+            case 4: // eliminar 
+                /* 1-pedimos el nif del cliente a borrar y lo almacenamos en la variable input
+                   2-recorremos el arraylist hasta encontrar el elemento coincidente y almacenamos la posicion en index 
+                   3-fuera del ciclo for eliminamos el comoponente del arraylist con el método remove(int index) de la misma clase arraylist 
+                */   
+                int index = 0;
                 
-            case 4: //desar
+                input = JOptionPane.showInputDialog("Introdueixi el codi del recanvi que es vol eliminar:");
+
+                for (int j = 0; j < ControladorPrincipal.getTallerActual().getComponents().size(); j++){
+                    if (ControladorPrincipal.getTallerActual().getComponents().get(j) instanceof Recanvi) {
+                        if(((Recanvi) ControladorPrincipal.getTallerActual().getComponents().get(j)).getCodi().equals(input)){
+                            index = j;
+                        }
+                        
+                        
+                    }  
+                }
+                ControladorPrincipal.getTallerActual().getComponents().remove(index);
+                menuRecanvis.getFrame().setVisible(true);
+                break;     
+            case 5: //desar
                 /*
                 TODO
                 
