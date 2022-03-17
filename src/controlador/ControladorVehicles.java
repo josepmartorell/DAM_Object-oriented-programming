@@ -173,37 +173,37 @@ public class ControladorVehicles implements ActionListener{
 
                 break;
             case 3: // modificar
-                int i = 0;      
-                int totalVehicles = 0;
-                int pointer = 0;
-                
-                input = JOptionPane.showInputDialog("Introdueixi la matricula del vehicle que es vol modificar:");
-
-                for (int j = 0; j < ControladorPrincipal.getTallerActual().getComponents().size(); j++){
-                    if (ControladorPrincipal.getTallerActual().getComponents().get(j) instanceof Vehicle) {
-                        totalVehicles++;
-                    }  
-                }
-
-                String[][] data = new String[totalVehicles][4];
-                for (Component component: ControladorPrincipal.getTallerActual().getComponents()){
-                    if (component instanceof Vehicle){
-                        if(((Vehicle) component).getMatricula().equals(input)){
-                            data[i][0] = ((Vehicle)component).getMatricula();
-                            data[i][1] = ((Vehicle)component).getMarca();
-                            data[i][2] = ((Vehicle)component).getModel();
-                            data[i][3] = ((Vehicle)component).getColor();
-                            pointer = i;
-                        }
-                        i++;      
-                    }
-                }
-                this.VAR1 = data[pointer][0];
-                this.VAR2 = data[pointer][1];
-                this.VAR3 = data[pointer][2];
-                this.VAR4 = data[pointer][3];
-
                 if (ControladorPrincipal.getTallerActual() != null) {
+                    int i = 0;      
+                    int totalVehicles = 0;
+                    int pointer = 0;
+
+                    input = JOptionPane.showInputDialog("Introdueixi la matricula del vehicle que es vol modificar:");
+
+                    for (int j = 0; j < ControladorPrincipal.getTallerActual().getComponents().size(); j++){
+                        if (ControladorPrincipal.getTallerActual().getComponents().get(j) instanceof Vehicle) {
+                            totalVehicles++;
+                        }  
+                    }
+
+                    String[][] data = new String[totalVehicles][4];
+                    for (Component component: ControladorPrincipal.getTallerActual().getComponents()){
+                        if (component instanceof Vehicle){
+                            if(((Vehicle) component).getMatricula().equals(input)){
+                                data[i][0] = ((Vehicle)component).getMatricula();
+                                data[i][1] = ((Vehicle)component).getMarca();
+                                data[i][2] = ((Vehicle)component).getModel();
+                                data[i][3] = ((Vehicle)component).getColor();
+                                pointer = i;
+                            }
+                            i++;      
+                        }
+                    }
+                    this.VAR1 = data[pointer][0];
+                    this.VAR2 = data[pointer][1];
+                    this.VAR3 = data[pointer][2];
+                    this.VAR4 = data[pointer][3];
+
                     updateVehicleForm = new UpdateVehicleForm("Vehicle", VAR1, VAR2, VAR3, VAR4);
                     afegirListenersUpdateForm();
                 } else {
@@ -215,22 +215,27 @@ public class ControladorVehicles implements ActionListener{
                 /* 1-pedimos el nif del cliente a borrar y lo almacenamos en la variable input
                    2-recorremos el arraylist hasta encontrar el elemento coincidente y almacenamos la posicion en index 
                    3-fuera del ciclo for eliminamos el comoponente del arraylist con el método remove(int index) de la misma clase arraylist 
-                */   
-                int index = 0;
-                
-                input = JOptionPane.showInputDialog("Introdueixi la matricula del vehicle que es vol eliminar:");
+                */ 
+                if (ControladorPrincipal.getTallerActual() != null) {
+                    int index = 0;
 
-                for (int j = 0; j < ControladorPrincipal.getTallerActual().getComponents().size(); j++){
-                    if (ControladorPrincipal.getTallerActual().getComponents().get(j) instanceof Vehicle) {
-                        if(((Vehicle) ControladorPrincipal.getTallerActual().getComponents().get(j)).getMatricula().equals(input)){
-                            index = j;
-                        }
-                        
-                        
-                    }  
-                }
-                ControladorPrincipal.getTallerActual().getComponents().remove(index);
-                menuVehicles.getFrame().setVisible(true);
+                    input = JOptionPane.showInputDialog("Introdueixi la matricula del vehicle que es vol eliminar:");
+
+                    for (int j = 0; j < ControladorPrincipal.getTallerActual().getComponents().size(); j++){
+                        if (ControladorPrincipal.getTallerActual().getComponents().get(j) instanceof Vehicle) {
+                            if(((Vehicle) ControladorPrincipal.getTallerActual().getComponents().get(j)).getMatricula().equals(input)){
+                                index = j;
+                            }
+
+
+                        }  
+                    }
+                    ControladorPrincipal.getTallerActual().getComponents().remove(index);
+                    menuVehicles.getFrame().setVisible(true);
+                } else {
+                    menuVehicles.getFrame().setVisible(true);
+                    JOptionPane.showMessageDialog(menuVehicles.getFrame(), "Abans s'ha de seleccionar el taller a modificar");
+                }    
                 break; 
             case 5: //desar
                 /*
