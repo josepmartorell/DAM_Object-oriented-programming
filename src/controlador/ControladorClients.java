@@ -157,7 +157,7 @@ public class ControladorClients implements ActionListener {
                     afegirListenersForm();
                 } else {
                     menuClients.getFrame().setVisible(true);
-                    JOptionPane.showMessageDialog(menuClients.getFrame(), "Abans s'ha de crear al menys un taller en el menú de tallers.");
+                    JOptionPane.showMessageDialog(menuClients.getFrame(), "Abans s'ha de seleccionar un taller");
                 }
                 break;
             case 2: // llista
@@ -166,7 +166,7 @@ public class ControladorClients implements ActionListener {
                     afegirListenersLlista();
                 } else {
                     menuClients.getFrame().setVisible(true);
-                    JOptionPane.showMessageDialog(menuClients.getFrame(), "Abans s'ha de crear al menys un taller en el menú de tallers.");
+                    JOptionPane.showMessageDialog(menuClients.getFrame(), "Abans s'ha de seleccionar un taller");
                 }
 
                 break;
@@ -206,7 +206,7 @@ public class ControladorClients implements ActionListener {
                     afegirListenersUpdateForm();
                 } else {
                     menuClients.getFrame().setVisible(true);
-                    JOptionPane.showMessageDialog(menuClients.getFrame(), "Abans s'ha de seleccionar el taller a modificar");
+                    JOptionPane.showMessageDialog(menuClients.getFrame(), "Abans s'ha de seleccionar un taller");
                 }
                 break;
             case 4: // eliminar 
@@ -232,7 +232,7 @@ public class ControladorClients implements ActionListener {
                     menuClients.getFrame().setVisible(true);
                 } else {
                     menuClients.getFrame().setVisible(true);
-                    JOptionPane.showMessageDialog(menuClients.getFrame(), "Abans s'ha de seleccionar el taller a modificar");
+                    JOptionPane.showMessageDialog(menuClients.getFrame(), "Abans s'ha de seleccionar un taller");
                 }
                 break;             
             case 5: //desar

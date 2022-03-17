@@ -159,7 +159,7 @@ public class ControladorVehicles implements ActionListener{
                     afegirListenersForm();
                 } else {
                     menuVehicles.getFrame().setVisible(true);
-                    JOptionPane.showMessageDialog(menuVehicles.getFrame(), "Abans s'ha de crear al menys un taller en el menú de tallers.");
+                    JOptionPane.showMessageDialog(menuVehicles.getFrame(), "Abans s'ha de seleccionar un taller");
                 }
                 break;
             case 2: // llista
@@ -168,7 +168,7 @@ public class ControladorVehicles implements ActionListener{
                     afegirListenersLlista();
                 } else {
                     menuVehicles.getFrame().setVisible(true);
-                    JOptionPane.showMessageDialog(menuVehicles.getFrame(), "Abans s'ha de crear al menys un taller en el menú de tallers.");
+                    JOptionPane.showMessageDialog(menuVehicles.getFrame(), "Abans s'ha de seleccionar un taller");
                 }
 
                 break;
@@ -208,7 +208,7 @@ public class ControladorVehicles implements ActionListener{
                     afegirListenersUpdateForm();
                 } else {
                     menuVehicles.getFrame().setVisible(true);
-                    JOptionPane.showMessageDialog(menuVehicles.getFrame(), "Abans s'ha de seleccionar el taller a modificar");
+                    JOptionPane.showMessageDialog(menuVehicles.getFrame(), "Abans s'ha de seleccionar un taller");
                 }
                 break; 
             case 4: // eliminar 
@@ -234,7 +234,7 @@ public class ControladorVehicles implements ActionListener{
                     menuVehicles.getFrame().setVisible(true);
                 } else {
                     menuVehicles.getFrame().setVisible(true);
-                    JOptionPane.showMessageDialog(menuVehicles.getFrame(), "Abans s'ha de seleccionar el taller a modificar");
+                    JOptionPane.showMessageDialog(menuVehicles.getFrame(), "Abans s'ha de seleccionar un taller");
                 }    
                 break; 
             case 5: //desar

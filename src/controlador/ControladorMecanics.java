@@ -154,7 +154,7 @@ public class ControladorMecanics implements ActionListener{
                     afegirListenersForm();                    
                 } else {
                     menuMecanics.getFrame().setVisible(true);
-                    JOptionPane.showMessageDialog(menuMecanics.getFrame(), "Abans s'ha de crear al menys un taller en el menú de tallers.");
+                    JOptionPane.showMessageDialog(menuMecanics.getFrame(), "Abans s'ha de seleccionar un taller");
                 }
                 break;
             case 2: //Llista
@@ -163,7 +163,7 @@ public class ControladorMecanics implements ActionListener{
                     afegirListenersLlista();                    
                 } else {
                     menuMecanics.getFrame().setVisible(true);
-                    JOptionPane.showMessageDialog(menuMecanics.getFrame(), "Abans s'ha de crear al menys un taller en el menú de tallers.");
+                    JOptionPane.showMessageDialog(menuMecanics.getFrame(), "Abans s'ha de seleccionar un taller");
                 }
                 break;
             case 3: // modificar
@@ -202,7 +202,7 @@ public class ControladorMecanics implements ActionListener{
                     afegirListenersUpdateForm();
                 } else {
                     menuMecanics.getFrame().setVisible(true);
-                    JOptionPane.showMessageDialog(menuMecanics.getFrame(), "Abans s'ha de seleccionar el taller a modificar");
+                    JOptionPane.showMessageDialog(menuMecanics.getFrame(), "Abans s'ha de seleccionar un taller");
                 }
                 break;
             case 4: // eliminar 
@@ -228,7 +228,7 @@ public class ControladorMecanics implements ActionListener{
                     menuMecanics.getFrame().setVisible(true);
                 } else {
                     menuMecanics.getFrame().setVisible(true);
-                    JOptionPane.showMessageDialog(menuMecanics.getFrame(), "Abans s'ha de seleccionar el taller a modificar");
+                    JOptionPane.showMessageDialog(menuMecanics.getFrame(), "Abans s'ha de seleccionar un taller");
                 }            
                 break; 
             case 5: //desar

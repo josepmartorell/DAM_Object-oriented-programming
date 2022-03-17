@@ -155,7 +155,7 @@ public class ControladorRecanvis implements ActionListener {
                     afegirListenersForm();
                 } else {
                     menuRecanvis.getFrame().setVisible(true);
-                    JOptionPane.showMessageDialog(menuRecanvis.getFrame(), "Abans s'ha de crear al menys un taller en el menú de tallers.");
+                    JOptionPane.showMessageDialog(menuRecanvis.getFrame(), "Abans s'ha de seleccionar un taller");
                 }
                 break;
             case 2: // llista
@@ -164,7 +164,7 @@ public class ControladorRecanvis implements ActionListener {
                     afegirListenersLlista();
                 } else {
                     menuRecanvis.getFrame().setVisible(true);
-                    JOptionPane.showMessageDialog(menuRecanvis.getFrame(), "Abans s'ha de crear al menys un taller en el menú de tallers.");
+                    JOptionPane.showMessageDialog(menuRecanvis.getFrame(), "Abans s'ha de seleccionar un taller");
                 }
                 break;
             case 3: // modificar
@@ -174,37 +174,56 @@ public class ControladorRecanvis implements ActionListener {
                     int pointer = 0;
 
                     input = JOptionPane.showInputDialog("Introdueixi el codi del recanvi que es vol modificar:");
+                    /**/
+                    if(input != null){
 
-                    for (int j = 0; j < ControladorPrincipal.getTallerActual().getComponents().size(); j++){
-                        if (ControladorPrincipal.getTallerActual().getComponents().get(j) instanceof Recanvi) {
-                            totalRecanvis++;
-                        }  
-                    }
+                        input = (String)input;
+                        //El usuario coloco algo que no sea solo espacios
+                        if(!input.trim().equals("")){
 
-                    String[][] data = new String[totalRecanvis][4];
-                    for (Component component: ControladorPrincipal.getTallerActual().getComponents()){
-                        if (component instanceof Recanvi){
-                            if(((Recanvi) component).getCodi().equals(input)){
-                                data[i][0] = ((Recanvi)component).getCodi();
-                                data[i][1] = ((Recanvi)component).getNom();
-                                data[i][2] = ((Recanvi)component).getFabricant();
-                                data[i][3] = String.valueOf(((Recanvi)component).getPreu());
-
-                                pointer = i;
+                            //Aqui deberias seguir tu codigo al validar que todo es correcto.
+                            for (int j = 0; j < ControladorPrincipal.getTallerActual().getComponents().size(); j++){
+                                if (ControladorPrincipal.getTallerActual().getComponents().get(j) instanceof Recanvi) {
+                                    totalRecanvis++;
+                                }  
                             }
-                            i++;      
+
+                            String[][] data = new String[totalRecanvis][4];
+                            for (Component component: ControladorPrincipal.getTallerActual().getComponents()){
+                                if (component instanceof Recanvi){
+                                    if(((Recanvi) component).getCodi().equals(input)){
+                                        data[i][0] = ((Recanvi)component).getCodi();
+                                        data[i][1] = ((Recanvi)component).getNom();
+                                        data[i][2] = ((Recanvi)component).getFabricant();
+                                        data[i][3] = String.valueOf(((Recanvi)component).getPreu());
+
+                                        pointer = i;
+                                    }
+                                    i++;      
+                                }
+                            }
+                            this.VAR1 = data[pointer][0];
+                            this.VAR2 = data[pointer][1];
+                            this.VAR3 = data[pointer][2];
+                            this.VAR4 = data[pointer][3];
+
+                            updateRecanviForm = new UpdateRecanviForm("Vehicle", VAR1, VAR2, VAR3, VAR4);
+                            afegirListenersUpdateForm();
+
+                        }else{
+                           //El usuario coloco solo espacios en blanco o tabulaciones.
                         }
-                    }
-                    this.VAR1 = data[pointer][0];
-                    this.VAR2 = data[pointer][1];
-                    this.VAR3 = data[pointer][2];
-                    this.VAR4 = data[pointer][3];
-             
-                    updateRecanviForm = new UpdateRecanviForm("Vehicle", VAR1, VAR2, VAR3, VAR4);
-                    afegirListenersUpdateForm();
+
+                     }else{
+                        //El usuario le dio al boton cancelar.
+                        menuRecanvis.getFrame().setVisible(true);
+                     }
+                    /**/
+
+
                 } else {
                     menuRecanvis.getFrame().setVisible(true);
-                    JOptionPane.showMessageDialog(menuRecanvis.getFrame(), "Abans s'ha de seleccionar el taller a modificar");
+                    JOptionPane.showMessageDialog(menuRecanvis.getFrame(), "Abans s'ha de seleccionar un taller");
                 }
                 break; 
             case 4: // eliminar 
@@ -230,7 +249,7 @@ public class ControladorRecanvis implements ActionListener {
                     menuRecanvis.getFrame().setVisible(true);
                 } else {
                     menuRecanvis.getFrame().setVisible(true);
-                    JOptionPane.showMessageDialog(menuRecanvis.getFrame(), "Abans s'ha de seleccionar el taller a modificar");
+                    JOptionPane.showMessageDialog(menuRecanvis.getFrame(), "Abans s'ha de seleccionar un taller");
                 }
                 break;     
             case 5: //desar
