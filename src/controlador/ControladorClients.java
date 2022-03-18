@@ -175,40 +175,72 @@ public class ControladorClients implements ActionListener {
                     int i = 0;      
                     int totalClients = 0;
                     int pointer = 0;
+                    boolean match = false;
 
                     input = JOptionPane.showInputDialog("Introdueixi el nif del client que es vol modificar:");
+                    /**/
+                    if(input != null){
 
-                    for (int j = 0; j < ControladorPrincipal.getTallerActual().getComponents().size(); j++){
-                        if (ControladorPrincipal.getTallerActual().getComponents().get(j) instanceof Client) {
-                            totalClients++;
-                        }  
-                    }
+                        input = (String)input;
+                        //El usuario coloco algo que no sea solo espacios
+                        if(!input.trim().equals("")){
 
-                    String[][] data = new String[totalClients][4];
-                    for (Component component: ControladorPrincipal.getTallerActual().getComponents()){
-                        if (component instanceof Client){
-                            if(((Client) component).getNif().equals(input)){
-                                data[i][0] = ((Client)component).getNif();
-                                data[i][1] = ((Client)component).getNom();
-                                data[i][2] = ((Client)component).getTelefon();
-                                data[i][3] = ((Client)component).getCorreu();
-                                pointer = i;
+                            //Aqui deberias seguir tu codigo al validar que todo es correcto.
+                            for (int j = 0; j < ControladorPrincipal.getTallerActual().getComponents().size(); j++){
+                                if (ControladorPrincipal.getTallerActual().getComponents().get(j) instanceof Client) {
+                                    totalClients++;
+                                }  
                             }
-                            i++;      
-                        }
-                    }
-                    this.VAR1 = data[pointer][0];
-                    this.VAR2 = data[pointer][1];
-                    this.VAR3 = data[pointer][2];
-                    this.VAR4 = data[pointer][3];
 
-                    updateForm = new UpdateForm("Client", VAR1, VAR2, VAR3, VAR4);
-                    afegirListenersUpdateForm();
+                            String[][] data = new String[totalClients][4];
+                            for (Component component: ControladorPrincipal.getTallerActual().getComponents()){
+                                if (component instanceof Client){
+                                    //si coincideix el codi omplim el array amb les dedes del client y establim el boolean match a valor true
+                                    if(((Client) component).getNif().equals(input)){
+                                        match = true;
+                                        data[i][0] = ((Client)component).getNif();
+                                        data[i][1] = ((Client)component).getNom();
+                                        data[i][2] = ((Client)component).getTelefon();
+                                        data[i][3] = ((Client)component).getCorreu();
+
+                                        pointer = i++;
+                                    }
+                           
+                                }
+                            }
+                            if(match){
+                                this.VAR1 = data[pointer][0];
+                                this.VAR2 = data[pointer][1];
+                                this.VAR3 = data[pointer][2];
+                                this.VAR4 = data[pointer][3];
+
+                                updateForm = new UpdateForm("Client", VAR1, VAR2, VAR3, VAR4);
+                                afegirListenersUpdateForm();                        
+                            }else{
+                                //El nif introducido no coincide.
+                                JOptionPane.showMessageDialog(menuClients.getFrame(),"Nif erroni, premeu aceptar i torneu a introduir el nif:");
+                                seleccionarOpcio(3);
+                            }
+
+
+                        }else{
+                           //El usuario coloco solo espacios en blanco o tabulaciones.
+                            JOptionPane.showMessageDialog(menuClients.getFrame(),"Camp obligatori, premeu aceptar i torneu a introduir el nif:");
+                            seleccionarOpcio(3);
+                        }
+
+                     }else{
+                        //El usuario le dio al boton cancelar.
+                        menuClients.getFrame().setVisible(true);
+                     }
+                    /**/
+
+
                 } else {
                     menuClients.getFrame().setVisible(true);
                     JOptionPane.showMessageDialog(menuClients.getFrame(), "Abans s'ha de seleccionar un taller");
                 }
-                break;
+                break; 
             case 4: // eliminar 
                 /* 1-pedimos el nif del cliente a borrar y lo almacenamos en la variable input
                    2-recorremos el arraylist hasta encontrar el elemento coincidente y almacenamos la posicion en index 
