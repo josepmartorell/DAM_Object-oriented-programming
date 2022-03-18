@@ -172,6 +172,7 @@ public class ControladorRecanvis implements ActionListener {
                     int i = 0;      
                     int totalRecanvis = 0;
                     int pointer = 0;
+                    boolean match = false;
 
                     input = JOptionPane.showInputDialog("Introdueixi el codi del recanvi que es vol modificar:");
                     /**/
@@ -191,27 +192,38 @@ public class ControladorRecanvis implements ActionListener {
                             String[][] data = new String[totalRecanvis][4];
                             for (Component component: ControladorPrincipal.getTallerActual().getComponents()){
                                 if (component instanceof Recanvi){
+                                    //si coincideix el codi omplim el array amb les dedes del recanvi y establim el boolean match a valor true
                                     if(((Recanvi) component).getCodi().equals(input)){
+                                        match = true;
                                         data[i][0] = ((Recanvi)component).getCodi();
                                         data[i][1] = ((Recanvi)component).getNom();
                                         data[i][2] = ((Recanvi)component).getFabricant();
                                         data[i][3] = String.valueOf(((Recanvi)component).getPreu());
 
-                                        pointer = i;
+                                        pointer = i++;
                                     }
-                                    i++;      
+                           
                                 }
                             }
-                            this.VAR1 = data[pointer][0];
-                            this.VAR2 = data[pointer][1];
-                            this.VAR3 = data[pointer][2];
-                            this.VAR4 = data[pointer][3];
+                            if(match){
+                                this.VAR1 = data[pointer][0];
+                                this.VAR2 = data[pointer][1];
+                                this.VAR3 = data[pointer][2];
+                                this.VAR4 = data[pointer][3];
 
-                            updateRecanviForm = new UpdateRecanviForm("Vehicle", VAR1, VAR2, VAR3, VAR4);
-                            afegirListenersUpdateForm();
+                                updateRecanviForm = new UpdateRecanviForm("Vehicle", VAR1, VAR2, VAR3, VAR4);
+                                afegirListenersUpdateForm();                        
+                            }else{
+                                //El codigo introducido no coincide.
+                                JOptionPane.showMessageDialog(menuRecanvis.getFrame(),"Codi erroni, premeu aceptar i torneu a introduir el codi:");
+                                seleccionarOpcio(3);
+                            }
+
 
                         }else{
                            //El usuario coloco solo espacios en blanco o tabulaciones.
+                            JOptionPane.showMessageDialog(menuRecanvis.getFrame(),"Camp obligatori, premeu aceptar i torneu a introduir el codi:");
+                            seleccionarOpcio(3);
                         }
 
                      }else{
