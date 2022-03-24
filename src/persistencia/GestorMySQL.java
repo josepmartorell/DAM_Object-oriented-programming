@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import model.Client;
 import model.Mecanic;
 import model.Recanvi;
+import model.Reparacio;
 import model.Taller;
 import model.Vehicle;
 import principal.Component;
@@ -103,6 +104,11 @@ public class GestorMySQL implements ProveedorPersistencia {
     private static String eliminaVehicleSQL = " DELETE FROM vehicles WHERE taller = ?";
 
     private PreparedStatement eliminaVehicleSt;
+    
+    
+    private static String eliminaReparacioSQL = " DELETE FROM reparacions WHERE taller = ?";
+    
+    private PreparedStatement eliminaReparacioSt;
 
     /*
      * TODO
@@ -131,6 +137,11 @@ public class GestorMySQL implements ProveedorPersistencia {
     private static String insereixVehicleSQL = "INSERT INTO vehicles(matricula, marca, model, color, taller) VALUES (?, ?, ?, ?, ?)";
 
     private PreparedStatement insereixVehicleSt;
+    
+    
+    private static String insereixReparacioSQL = "INSERT INTO reparacions(codi, dataInici, dataFi, taller) VALUES (?, ?, ?, ?)";
+    
+    private PreparedStatement insereixReparacioSt;
 
 
     /*
@@ -161,6 +172,11 @@ public class GestorMySQL implements ProveedorPersistencia {
     private static String selVehiclesSQL = " SELECT * FROM vehicles WHERE taller = ?";
 
     private PreparedStatement selVehiclesSt;
+    
+   
+    private static String selReparacioSQL = " SELECT * FROM reparacions WHERE taller = ?";
+    
+    private PreparedStatement selReparacioSt;
 
     /*
      *TODO
@@ -191,14 +207,17 @@ public class GestorMySQL implements ProveedorPersistencia {
             eliminaClientSt = conn.prepareStatement(eliminaClientSQL);
             eliminaMecanicSt = conn.prepareStatement(eliminaMecanicSQL);
             eliminaVehicleSt = conn.prepareStatement(eliminaVehicleSQL);
+            eliminaReparacioSt = conn.prepareStatement(eliminaReparacioSQL);
             insereixRecanviSt = conn.prepareStatement(insereixRecanviSQL);
             insereixClientSt = conn.prepareStatement(insereixClientSQL);
             insereixMecanicSt = conn.prepareStatement(insereixMecanicSQL);
             insereixVehicleSt = conn.prepareStatement(insereixVehicleSQL);
+            insereixReparacioSt = conn.prepareStatement(insereixReparacioSQL);
             selRecanvisSt = conn.prepareStatement(selRecanvisSQL);
             selClientsSt = conn.prepareStatement(selClientsSQL);
             selMecanicsSt = conn.prepareStatement(selMecanicsSQL);
             selVehiclesSt = conn.prepareStatement(selVehiclesSQL);
+            selReparacioSt = conn.prepareStatement(selReparacioSQL);
         } catch (SQLException e) {
             conn = null;
             System.out.println(e.getMessage());
@@ -266,6 +285,14 @@ public class GestorMySQL implements ProveedorPersistencia {
                 //Eliminem vehicles
                 eliminaVehicleSt.setString(1, taller.getCif());
                 eliminaVehicleSt.executeUpdate();
+                
+                //Eliminem vehicles
+                eliminaVehicleSt.setString(1, taller.getCif());
+                eliminaVehicleSt.executeUpdate();
+                
+                //Eliminen reparacions
+                eliminaReparacioSt.setString(1, taller.getCif());
+                eliminaReparacioSt.executeUpdate();
 
             } else { //El taller no existeix
 
@@ -321,6 +348,17 @@ public class GestorMySQL implements ProveedorPersistencia {
                     insereixVehicleSt.setString(4, ((Vehicle) component).getColor());
                     insereixVehicleSt.setString(5, taller.getCif());
                     insereixVehicleSt.executeUpdate();
+                }
+            }
+            
+            //Insercio reparacions del taller
+            for (Component component: taller.getComponents()){
+                if (component != null && component instanceof Reparacio){
+                    insereixReparacioSt.setString(1, ((Reparacio) component).getCodi());
+                    insereixReparacioSt.setString(2, ((Reparacio) component).getDataInici());
+                    insereixReparacioSt.setString(3, ((Reparacio) component).getDataFi());
+                    insereixReparacioSt.setString(4, taller.getCif());
+                    insereixReparacioSt.executeUpdate();
                 }
             }
 
@@ -400,8 +438,18 @@ public class GestorMySQL implements ProveedorPersistencia {
                 while (registresVehicles.next()) {
                     taller.addVehicle(new Vehicle(registresVehicles.getString("matricula"), registresVehicles.getString("marca"), registresVehicles.getString("model"), registresVehicles.getString("color")));
                 }
+                
+                //Seleccionem les reparacions de la taula reparacions i els afegim al taller
+                selReparacioSt.setString(1, taller.getCif());
+
+                ResultSet registresReparacions = selReparacioSt.executeQuery();
+
+                while (registresReparacions.next()) {
+                    taller.addReparacio(new Reparacio(registresReparacions.getString("codi"), registresReparacions.getString("dataInici"), registresReparacions.getString("dataFi")));
+                }
 
             } else {
+                
                 throw new GestorTallerMecanicException("GestorMySQL.noExisteix");
             }
             tancaConnexio();
