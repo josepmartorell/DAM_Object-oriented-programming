@@ -54,7 +54,7 @@ public class ReparacioTableModel extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return data[0].length;
+        return columnNames.length;
     }
     
     @Override
