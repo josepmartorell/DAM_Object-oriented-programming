@@ -4,6 +4,7 @@
  */
 package vista;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,8 +15,8 @@ import javax.swing.JTextField;
  *
  * @author jtech
  */
-public class ReparacioForm {
-        
+public class UpdateReparacioForm {
+    
     private JFrame frame;
     
     private final int AMPLADA = 300;
@@ -29,20 +30,23 @@ public class ReparacioForm {
     private JTextField tDataFi;
 
     private JButton desar;   
-    private JButton sortir; 
-
-    public ReparacioForm() {
+    private JButton sortir;  
+    
+    public UpdateReparacioForm(String object, String VAR1, String VAR2, String VAR3) {
         
-        frame = new JFrame("Reparacio Taller");
+        //Definició de la finestra
+        frame = new JFrame("Modificar " + object);
         frame.setLayout(new GridLayout(0, 1));
 
         //Creació dels controls del formulari
-        lCodi = new JLabel("Codi");
-        tCodi = new JTextField(10);
+        lCodi = new JLabel("CODI");
+        tCodi = new JTextField(VAR1);
+        tCodi.setEditable(false);
+        tCodi.setBackground(Color.white);
         lDataInici = new JLabel("Data Inici");
-        tDataInici = new JTextField(20);
+        tDataInici = new JTextField(VAR2);
         lDataFi = new JLabel("Data Fi");
-        tDataFi = new JTextField(20);
+        tDataFi = new JTextField(VAR3);
 
         //Creació dels botons del formulari
         desar = new JButton("Desar");
@@ -61,8 +65,7 @@ public class ReparacioForm {
         showFinestra();
     }
     
-    public ReparacioForm(String codi, String dataInici, String dataFi){
-        this();
+    public UpdateReparacioForm(String codi, String dataInici, String dataFi){
         tCodi.setText(codi);
         tDataInici.setText(dataInici);
         tDataFi.setText(dataFi);
@@ -79,73 +82,74 @@ public class ReparacioForm {
         return frame;
     }
 
-    public JLabel getlCodi() {
-        return lCodi;
-    }
-
-    public JTextField gettCodi() {
-        return tCodi;
-    }
-
-    public JLabel getlDataInici() {
-        return lDataInici;
-    }
-
-    public JTextField gettDataInici() {
-        return tDataInici;
-    }
-
-    public JLabel getlDataFi() {
-        return lDataFi;
-    }
-
-    public JTextField gettDataFi() {
-        return tDataFi;
-    }
-
-    public JButton getDesar() {
-        return desar;
-    }
-
-    public JButton getSortir() {
-        return sortir;
-    }
-
     public void setFrame(JFrame frame) {
         this.frame = frame;
+    }
+
+    public JLabel getlCodi() {
+        return lCodi;
     }
 
     public void setlCodi(JLabel lCodi) {
         this.lCodi = lCodi;
     }
 
+    public JTextField gettCodi() {
+        return tCodi;
+    }
+
     public void settCodi(JTextField tCodi) {
         this.tCodi = tCodi;
+    }
+
+    public JLabel getlDataInici() {
+        return lDataInici;
     }
 
     public void setlDataInici(JLabel lDataInici) {
         this.lDataInici = lDataInici;
     }
 
+    public JTextField gettDataInici() {
+        return tDataInici;
+    }
+
     public void settDataInici(JTextField tDataInici) {
         this.tDataInici = tDataInici;
+    }
+
+    public JLabel getlDataFi() {
+        return lDataFi;
     }
 
     public void setlDataFi(JLabel lDataFi) {
         this.lDataFi = lDataFi;
     }
 
+    public JTextField gettDataFi() {
+        return tDataFi;
+    }
+
     public void settDataFi(JTextField tDataFi) {
         this.tDataFi = tDataFi;
+    }
+
+    public JButton getDesar() {
+        return desar;
     }
 
     public void setDesar(JButton desar) {
         this.desar = desar;
     }
 
+    public JButton getSortir() {
+        return sortir;
+    }
+
     public void setSortir(JButton sortir) {
         this.sortir = sortir;
     }
- 
+
     
 }
+
