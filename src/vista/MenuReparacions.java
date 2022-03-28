@@ -29,7 +29,7 @@ public class MenuReparacions {
         menuButtons[0] = new JButton("0. Sortir");
         menuButtons[1] = new JButton("1. Alta"); 
         menuButtons[2] = new JButton("2. Modificar"); 
-        menuButtons[3] = new JButton("3. Assignar Client o Clienta"); 
+        menuButtons[3] = new JButton("3. Assignar client o clienta"); 
         menuButtons[4] = new JButton("4. Assignar mecànic o mecànica"); 
         menuButtons[5] = new JButton("5. Assignar recanvi"); 
         menuButtons[6] = new JButton("6. Calcular preu");

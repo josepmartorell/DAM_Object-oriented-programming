@@ -8,7 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import model.Client;
 import model.Reparacio;
+import model.Taller;
 import persistencia.GestorPersistencia;
 import principal.Component;
 import principal.GestorTallerMecanicException;
@@ -32,6 +34,8 @@ public class ControladorReparacions implements ActionListener{
     private String VAR1;
     private String VAR2;
     private String VAR3;
+    private Taller taller;
+    private Client client;
 
     public ControladorReparacions() {
         menuReparacions = new MenuReparacions();
@@ -229,13 +233,44 @@ public class ControladorReparacions implements ActionListener{
                     JOptionPane.showMessageDialog(menuReparacions.getFrame(), "Abans s'ha de seleccionar un taller");
                 }
                 break;
+                //TODO/->
+            case 3: //assignar client
+                taller = ControladorPrincipal.getTallerActual();
+                if(taller != null){
+                    input = JOptionPane.showInputDialog("Introdueixi el nif del client que es vol assignar:");
+                    if(input != null){
+                         //recorremos el List<Component> components = new ArrayList(); en busca del cliente que coincida del array con el nif introducido
+                         for (Component component: taller.getComponents()){
+                            if (component instanceof Client){
+                                if(((Client) component).getNif().equals(input)){
+                                    client = (Client) component; //lo cargamos el la variable client si esta en la base de datos
+                                    menuReparacions.getFrame().setVisible(true);
+                                }else { //si no esta o bien el codigo es erroneo un cuadro de dialogo pide de nuevo el dato 
+                                    menuReparacions.getFrame().setVisible(false);
+                                    JOptionPane.showMessageDialog(menuReparacions.getFrame(), "El client no esta registrat a la base de dades o el nif el erroni, torni a introduir-lo.");
+                                    seleccionarOpcio(3);
+                                }
+                            }
+
+                        }
+
+                    }else{
+                            //El usuario le dio al boton cancelar.
+                            menuReparacions.getFrame().setVisible(true);
+                         }
+                }  else {
+                    menuReparacions.getFrame().setVisible(true);
+                    JOptionPane.showMessageDialog(menuReparacions.getFrame(), "Abans s'ha de seleccionar un taller");
+                }
+                break;             
+                //TODO/<-
             case 7: // llista
                 if (ControladorPrincipal.getTallers()[0] != null) {
                     reparacioLlista = new ReparacioLlista();
                     afegirListenersLlista();
                 } else {
                     menuReparacions.getFrame().setVisible(true);
-                    JOptionPane.showMessageDialog(menuReparacions.getFrame(), "Abans s'ha de crear al menys un taller en el menú de tallers.");
+                    JOptionPane.showMessageDialog(menuReparacions.getFrame(), "Abans s'ha de seleccionar un taller");
                 }
 
                 break;
