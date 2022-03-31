@@ -265,7 +265,7 @@ public class ControladorReparacions implements ActionListener{
                 break;             
                 //TODO/<-
             case 7: // llista
-                if (ControladorPrincipal.getTallers()[0] != null) {
+                if (ControladorPrincipal.getTallerActual() != null) {
                     reparacioLlista = new ReparacioLlista();
                     afegirListenersLlista();
                 } else {

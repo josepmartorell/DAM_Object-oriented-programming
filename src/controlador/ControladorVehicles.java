@@ -163,7 +163,7 @@ public class ControladorVehicles implements ActionListener{
                 }
                 break;
             case 2: // llista
-                if (ControladorPrincipal.getTallers()[0] != null) {
+                if (ControladorPrincipal.getTallerActual() != null) {
                     vehicleLlista = new VehicleLlista();
                     afegirListenersLlista();
                 } else {

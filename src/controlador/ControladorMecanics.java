@@ -158,7 +158,7 @@ public class ControladorMecanics implements ActionListener{
                 }
                 break;
             case 2: //Llista
-                if (ControladorPrincipal.getTallers()[0] != null) {
+                if (ControladorPrincipal.getTallerActual() != null) {
                     mecanicLlista = new MecanicLlista();
                     afegirListenersLlista();                    
                 } else {
