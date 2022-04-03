@@ -252,7 +252,7 @@ public class ControladorTaller implements ActionListener {
                     afegirListenersLlista();
                 } else {
                     menuTaller.getFrame().setVisible(true);
-                    JOptionPane.showMessageDialog(menuTaller.getFrame(), "Abans s'ha de crear al menys un taller");
+                    JOptionPane.showMessageDialog(menuTaller.getFrame(), "Abans s'ha de seleccionar el taller a llistar");
                 }
                 break;
 

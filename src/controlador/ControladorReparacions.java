@@ -161,7 +161,7 @@ public class ControladorReparacions implements ActionListener{
                     afegirListenersForm();
                 } else {
                     menuReparacions.getFrame().setVisible(true);
-                    JOptionPane.showMessageDialog(menuReparacions.getFrame(), "Abans s'ha de crear al menys un taller en el menú de tallers.");
+                    JOptionPane.showMessageDialog(menuReparacions.getFrame(), "Abans s'ha de seleccionar un taller");
                 }
                 break;
             case 2: // modificar
@@ -274,7 +274,21 @@ public class ControladorReparacions implements ActionListener{
                 }
 
                 break;
-            case 8: //desar
+            case 8:
+                // en esta opción reciclamos el método selectComponent de la clase Taller que devuelve un int del puntero del componente
+                taller = ControladorPrincipal.getTallerActual();
+                if(taller != null){
+                    taller = ControladorPrincipal.getTallerActual();
+                    input = JOptionPane.showInputDialog("Introdueixi el codi de la reparació:");
+                    taller.selectComponent(4, input);
+                    JOptionPane.showMessageDialog(menuReparacions.getFrame(), "selectComponent(): " + taller.selectComponent(4, input));
+                    menuReparacions.getFrame().setVisible(true);
+                } else {
+                    menuReparacions.getFrame().setVisible(true);
+                    JOptionPane.showMessageDialog(menuReparacions.getFrame(), "Abans s'ha de seleccionar un taller");
+                }
+                break;
+            case 9: //desar
                 /*
                 TODO
                 
