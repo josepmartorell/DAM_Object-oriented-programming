@@ -16,7 +16,7 @@ public class MenuReparacions {
     
     JFrame frame;
     
-    private JButton[] menuButtons = new JButton[9];
+    private JButton[] menuButtons = new JButton[10];
 
     private final int AMPLADA = 800;
     private final int ALCADA = 600;
@@ -34,7 +34,8 @@ public class MenuReparacions {
         menuButtons[5] = new JButton("5. Assignar recanvi"); 
         menuButtons[6] = new JButton("6. Calcular preu");
         menuButtons[7] = new JButton("7. Llista de reparacions"); 
-        menuButtons[8] = new JButton("8. Desar reparació"); 
+        menuButtons[8] = new JButton("8. Seleccionar reparació");
+        menuButtons[9] = new JButton("9. Desar reparació"); 
         
         for (JButton boto: menuButtons){
             frame.add(boto);
