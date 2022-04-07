@@ -36,6 +36,8 @@ public class ControladorReparacions implements ActionListener{
     private String VAR3;
     private Taller taller;
     private Client client;
+    private Reparacio reparacio;
+    private int index;
 
     public ControladorReparacions() {
         menuReparacions = new MenuReparacions();
@@ -237,27 +239,28 @@ public class ControladorReparacions implements ActionListener{
             case 3: //assignar client
                 taller = ControladorPrincipal.getTallerActual();
                 if(taller != null){
-                    input = JOptionPane.showInputDialog("Introdueixi el nif del client que es vol assignar:");
-                    if(input != null){
-                         //recorremos el List<Component> components = new ArrayList(); en busca del cliente que coincida del array con el nif introducido
-                         for (Component component: taller.getComponents()){
-                            if (component instanceof Client){
-                                if(((Client) component).getNif().equals(input)){
-                                    client = (Client) component; //lo cargamos el la variable client si esta en la base de datos
-                                    menuReparacions.getFrame().setVisible(true);
-                                }else { //si no esta o bien el codigo es erroneo un cuadro de dialogo pide de nuevo el dato 
-                                    menuReparacions.getFrame().setVisible(false);
-                                    JOptionPane.showMessageDialog(menuReparacions.getFrame(), "El client no esta registrat a la base de dades o el nif el erroni, torni a introduir-lo.");
-                                    seleccionarOpcio(3);
-                                }
+                    if(reparacio != null){
+                        input = JOptionPane.showInputDialog("Introdueixi el nif del client que es vol assignar:");
+                        if(input != null){//START
+                            for (int j = 0; j < ControladorPrincipal.getTallerActual().getComponents().size(); j++){
+                                if (ControladorPrincipal.getTallerActual().getComponents().get(j) instanceof Client) {
+                                    if(((Client) ControladorPrincipal.getTallerActual().getComponents().get(j)).getNif().equals(input)){
+                                        index = j;
+                                    }
+                                }  
                             }
-
-                        }
-
-                    }else{
-                            //El usuario le dio al boton cancelar.
-                            menuReparacions.getFrame().setVisible(true);
-                         }
+                            client = (Client) ControladorPrincipal.getTallerActual().getComponents().get(index);
+                            reparacio.setClient(client);
+                            JOptionPane.showMessageDialog(menuReparacions.getFrame(), "operacio exitosa.");
+                            menuReparacions.getFrame().setVisible(true);//STOP
+                        }else{
+                                //El usuario le dio al boton cancelar.
+                                menuReparacions.getFrame().setVisible(true);
+                             }
+                    }else {
+                        menuReparacions.getFrame().setVisible(true);
+                        JOptionPane.showMessageDialog(menuReparacions.getFrame(), "Abans s'ha de seleccionar una reparació");
+                    }
                 }  else {
                     menuReparacions.getFrame().setVisible(true);
                     JOptionPane.showMessageDialog(menuReparacions.getFrame(), "Abans s'ha de seleccionar un taller");
@@ -280,8 +283,8 @@ public class ControladorReparacions implements ActionListener{
                 if(taller != null){
                     taller = ControladorPrincipal.getTallerActual();
                     input = JOptionPane.showInputDialog("Introdueixi el codi de la reparació:");
-                    taller.selectComponent(4, input);
-                    JOptionPane.showMessageDialog(menuReparacions.getFrame(), "selectComponent(): " + taller.selectComponent(4, input));
+                    int selReparacio = taller.selectComponent(4, input);
+                    reparacio = (Reparacio) taller.getComponents().get(selReparacio);
                     menuReparacions.getFrame().setVisible(true);
                 } else {
                     menuReparacions.getFrame().setVisible(true);
