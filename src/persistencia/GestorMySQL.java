@@ -359,7 +359,7 @@ public class GestorMySQL implements ProveedorPersistencia {
                     insereixReparacioSt.setString(3, ((Reparacio) component).getDataFi());
                     insereixReparacioSt.setString(4, taller.getCif());
                     insereixReparacioSt.setString(5, ((Reparacio) component).getClient().getNif());
-                    insereixReparacioSt.setString(6, null);
+                    insereixReparacioSt.setString(6, ((Reparacio) component).getVehicle().getMatricula());
                     insereixReparacioSt.executeUpdate();
                 }
             }
