@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import model.Client;
 import model.Reparacio;
 import model.Taller;
+import model.Vehicle;
 import persistencia.GestorPersistencia;
 import principal.Component;
 import principal.GestorTallerMecanicException;
@@ -36,6 +37,7 @@ public class ControladorReparacions implements ActionListener{
     private String VAR3;
     private Taller taller;
     private Client client;
+    private Vehicle vehicle;
     private Reparacio reparacio;
     private int index;
 
@@ -265,6 +267,36 @@ public class ControladorReparacions implements ActionListener{
                     menuReparacions.getFrame().setVisible(true);
                     JOptionPane.showMessageDialog(menuReparacions.getFrame(), "Abans s'ha de seleccionar un taller");
                 }
+                break;
+            case 4: //assignar vehícle
+                taller = ControladorPrincipal.getTallerActual();
+                if(taller != null){
+                    if(reparacio != null){
+                        input = JOptionPane.showInputDialog("Introdueixi la matricula del vehícle que es vol assignar:");
+                        if(input != null){//START
+                            for (int j = 0; j < ControladorPrincipal.getTallerActual().getComponents().size(); j++){
+                                if (ControladorPrincipal.getTallerActual().getComponents().get(j) instanceof Vehicle) {
+                                    if(((Vehicle) ControladorPrincipal.getTallerActual().getComponents().get(j)).getMatricula().equals(input)){
+                                        index = j;
+                                    }
+                                }  
+                            }
+                            vehicle = (Vehicle) ControladorPrincipal.getTallerActual().getComponents().get(index);
+                            reparacio.setVehicle(vehicle);
+                            JOptionPane.showMessageDialog(menuReparacions.getFrame(), "operacio exitosa.");
+                            menuReparacions.getFrame().setVisible(true);//STOP
+                        }else{
+                                //El usuario le dio al boton cancelar.
+                                menuReparacions.getFrame().setVisible(true);
+                             }
+                    }else {
+                        menuReparacions.getFrame().setVisible(true);
+                        JOptionPane.showMessageDialog(menuReparacions.getFrame(), "Abans s'ha de seleccionar una reparació");
+                    }
+                }  else {
+                    menuReparacions.getFrame().setVisible(true);
+                    JOptionPane.showMessageDialog(menuReparacions.getFrame(), "Abans s'ha de seleccionar un taller");
+                }
                 break;             
                 //TODO/<-
             case 7: // llista
@@ -303,28 +335,31 @@ public class ControladorReparacions implements ActionListener{
                  */
                 
                 menuReparacions.getFrame().setVisible(true);
-                
-                if (ControladorPrincipal.getTallerActual() != null) {
-                    
-                    int tipusMissatge = JOptionPane.QUESTION_MESSAGE;
-                    int codi = JOptionPane.showOptionDialog(null, "Selecciona un mètode", "Desar taller", 0, tipusMissatge, null, ControladorPrincipal.getMETODESPERSISTENCIA(), "XML");
-                    
-                    if (codi != JOptionPane.CLOSED_OPTION) {
-                        
-                        GestorPersistencia gestor = new GestorPersistencia();
-                        
-                        try {                            
-                            gestor.desarTaller(ControladorPrincipal.getMETODESPERSISTENCIA()[codi], ControladorPrincipal.getTallerActual().getCif(), ControladorPrincipal.getTallerActual());
-                        } catch (GestorTallerMecanicException e) {                            
-                            JOptionPane.showMessageDialog(menuReparacions.getFrame(), e.getMessage());                            
-                        }
-                        
-                    }
-                    
-                } else {                    
-                    JOptionPane.showMessageDialog(menuReparacions.getFrame(), "Abans s'ha de seleccionar un taller");                
-                }
+                if(client != null && vehicle != null){
+                    if (ControladorPrincipal.getTallerActual() != null) {
 
+                        int tipusMissatge = JOptionPane.QUESTION_MESSAGE;
+                        int codi = JOptionPane.showOptionDialog(null, "Selecciona un mètode", "Desar taller", 0, tipusMissatge, null, ControladorPrincipal.getMETODESPERSISTENCIA(), "XML");
+
+                        if (codi != JOptionPane.CLOSED_OPTION) {
+
+                            GestorPersistencia gestor = new GestorPersistencia();
+
+                            try {                            
+                                gestor.desarTaller(ControladorPrincipal.getMETODESPERSISTENCIA()[codi], ControladorPrincipal.getTallerActual().getCif(), ControladorPrincipal.getTallerActual());
+                            } catch (GestorTallerMecanicException e) {                            
+                                JOptionPane.showMessageDialog(menuReparacions.getFrame(), e.getMessage());                            
+                            }
+
+                        }
+
+                    } else {                    
+                        JOptionPane.showMessageDialog(menuReparacions.getFrame(), "Abans s'ha de seleccionar un taller");                
+                    }
+                }else {
+                    menuReparacions.getFrame().setVisible(true);
+                    JOptionPane.showMessageDialog(menuReparacions.getFrame(), "Es necesari assignar abans el client i el vehicle per desar la reparació");
+                }
                 break;
 
         }
