@@ -248,13 +248,18 @@ public class ControladorReparacions implements ActionListener{
                                 if (ControladorPrincipal.getTallerActual().getComponents().get(j) instanceof Client) {
                                     if(((Client) ControladorPrincipal.getTallerActual().getComponents().get(j)).getNif().equals(input)){
                                         index = j;
+                                        client = (Client) ControladorPrincipal.getTallerActual().getComponents().get(index);
+                                        reparacio.setClient(client);
+                                        JOptionPane.showMessageDialog(menuReparacions.getFrame(), "operacio exitosa.");
+                                        menuReparacions.getFrame().setVisible(true);//STOP
+                                        
+                                    }else {
+                                        menuReparacions.getFrame().setVisible(true);
+                                        JOptionPane.showMessageDialog(menuReparacions.getFrame(), "El codi de client es erroni o no existeix");
                                     }
                                 }  
                             }
-                            client = (Client) ControladorPrincipal.getTallerActual().getComponents().get(index);
-                            reparacio.setClient(client);
-                            JOptionPane.showMessageDialog(menuReparacions.getFrame(), "operacio exitosa.");
-                            menuReparacions.getFrame().setVisible(true);//STOP
+                            
                         }else{
                                 //El usuario le dio al boton cancelar.
                                 menuReparacions.getFrame().setVisible(true);
@@ -278,13 +283,17 @@ public class ControladorReparacions implements ActionListener{
                                 if (ControladorPrincipal.getTallerActual().getComponents().get(j) instanceof Vehicle) {
                                     if(((Vehicle) ControladorPrincipal.getTallerActual().getComponents().get(j)).getMatricula().equals(input)){
                                         index = j;
+                                        vehicle = (Vehicle) ControladorPrincipal.getTallerActual().getComponents().get(index);
+                                        reparacio.setVehicle(vehicle);
+                                        JOptionPane.showMessageDialog(menuReparacions.getFrame(), "operacio exitosa.");
+                                        menuReparacions.getFrame().setVisible(true);//STOP
+                                    }else {
+                                        menuReparacions.getFrame().setVisible(true);
+                                        JOptionPane.showMessageDialog(menuReparacions.getFrame(), "La matricula del vehícle es erronia o no existeix");
                                     }
                                 }  
                             }
-                            vehicle = (Vehicle) ControladorPrincipal.getTallerActual().getComponents().get(index);
-                            reparacio.setVehicle(vehicle);
-                            JOptionPane.showMessageDialog(menuReparacions.getFrame(), "operacio exitosa.");
-                            menuReparacions.getFrame().setVisible(true);//STOP
+
                         }else{
                                 //El usuario le dio al boton cancelar.
                                 menuReparacions.getFrame().setVisible(true);
@@ -309,15 +318,26 @@ public class ControladorReparacions implements ActionListener{
                 }
 
                 break;
-            case 8:
+            case 8: 
                 // en esta opción reciclamos el método selectComponent de la clase Taller que devuelve un int del puntero del componente
                 taller = ControladorPrincipal.getTallerActual();
+                int selReparacio;
                 if(taller != null){
                     taller = ControladorPrincipal.getTallerActual();
-                    input = JOptionPane.showInputDialog("Introdueixi el codi de la reparació:");
-                    int selReparacio = taller.selectComponent(4, input);
-                    reparacio = (Reparacio) taller.getComponents().get(selReparacio);
-                    menuReparacions.getFrame().setVisible(true);
+                    input = JOptionPane.showInputDialog("Introdueixi el codi de la reparació:"); 
+                    if(input != null){
+                        if (taller.selectComponent(4, input) != -1){
+                            selReparacio = taller.selectComponent(4, input);
+                            reparacio = (Reparacio) taller.getComponents().get(selReparacio);
+                            menuReparacions.getFrame().setVisible(true);
+                        }else {
+                            menuReparacions.getFrame().setVisible(true);
+                            JOptionPane.showMessageDialog(menuReparacions.getFrame(), "El codi de la reparacio es erroni o no existeix");
+                        }
+                    }else{
+                            //El usuario le dio al boton cancelar.
+                            menuReparacions.getFrame().setVisible(true);
+                          }   
                 } else {
                     menuReparacions.getFrame().setVisible(true);
                     JOptionPane.showMessageDialog(menuReparacions.getFrame(), "Abans s'ha de seleccionar un taller");
