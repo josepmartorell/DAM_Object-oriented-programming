@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import model.Client;
+import model.Recanvi;
 import model.Reparacio;
 import model.Taller;
 import model.Vehicle;
@@ -39,6 +40,7 @@ public class ControladorReparacions implements ActionListener{
     private Client client;
     private Vehicle vehicle;
     private Reparacio reparacio;
+    private Recanvi recanvi;
     private int index;
 
     public ControladorReparacions() {
@@ -239,6 +241,7 @@ public class ControladorReparacions implements ActionListener{
                 break;
                 //TODO/->
             case 3: //assignar client
+                boolean match = false;
                 taller = ControladorPrincipal.getTallerActual();
                 if(taller != null){
                     if(reparacio != null){
@@ -252,13 +255,17 @@ public class ControladorReparacions implements ActionListener{
                                         reparacio.setClient(client);
                                         JOptionPane.showMessageDialog(menuReparacions.getFrame(), "operacio exitosa.");
                                         menuReparacions.getFrame().setVisible(true);//STOP
+                                        match = true;
                                         
-                                    }else {
-                                        menuReparacions.getFrame().setVisible(true);
-                                        JOptionPane.showMessageDialog(menuReparacions.getFrame(), "El codi de client es erroni o no existeix");
                                     }
                                 }  
                             }
+                            if(!match){
+                                menuReparacions.getFrame().setVisible(true);
+                                JOptionPane.showMessageDialog(menuReparacions.getFrame(), "El codi de client es erroni o no existeix");
+                                seleccionarOpcio(3);
+                            }
+                            
                             
                         }else{
                                 //El usuario le dio al boton cancelar.
@@ -274,6 +281,7 @@ public class ControladorReparacions implements ActionListener{
                 }
                 break;
             case 4: //assignar vehícle
+                boolean matchVehicle = false;
                 taller = ControladorPrincipal.getTallerActual();
                 if(taller != null){
                     if(reparacio != null){
@@ -287,11 +295,13 @@ public class ControladorReparacions implements ActionListener{
                                         reparacio.setVehicle(vehicle);
                                         JOptionPane.showMessageDialog(menuReparacions.getFrame(), "operacio exitosa.");
                                         menuReparacions.getFrame().setVisible(true);//STOP
-                                    }else {
-                                        menuReparacions.getFrame().setVisible(true);
-                                        JOptionPane.showMessageDialog(menuReparacions.getFrame(), "La matricula del vehícle es erronia o no existeix");
+                                        matchVehicle = true;
                                     }
                                 }  
+                            }
+                            if(!matchVehicle){
+                                menuReparacions.getFrame().setVisible(true);
+                                JOptionPane.showMessageDialog(menuReparacions.getFrame(), "La matricula del vehícle es erronia o no existeix");
                             }
 
                         }else{
@@ -306,7 +316,17 @@ public class ControladorReparacions implements ActionListener{
                     menuReparacions.getFrame().setVisible(true);
                     JOptionPane.showMessageDialog(menuReparacions.getFrame(), "Abans s'ha de seleccionar un taller");
                 }
-                break;             
+                break;
+            case 5: //assignar recanvi
+                    menuReparacions.getFrame().setVisible(true);
+                    JOptionPane.showMessageDialog(menuReparacions.getFrame(), "Funcionalitat en construcció");
+            
+                break;
+            case 6: //calcular preu
+                    menuReparacions.getFrame().setVisible(true);
+                    JOptionPane.showMessageDialog(menuReparacions.getFrame(), "Funcionalitat en construcció");
+            
+                break;
                 //TODO/<-
             case 7: // llista
                 if (ControladorPrincipal.getTallerActual() != null) {
