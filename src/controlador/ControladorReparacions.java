@@ -376,6 +376,9 @@ public class ControladorReparacions implements ActionListener{
                 
                 menuReparacions.getFrame().setVisible(true);
                 if(client != null && vehicle != null){
+                    JOptionPane.showMessageDialog(menuReparacions.getFrame(), "id_client: " + reparacio.getClient().getNif());
+                    JOptionPane.showMessageDialog(menuReparacions.getFrame(), "id_vehicle: " + reparacio.getVehicle().getMatricula());
+                    JOptionPane.showMessageDialog(menuReparacions.getFrame(), "codi_reparació: " + reparacio.getCodi());
                     if (ControladorPrincipal.getTallerActual() != null) {
 
                         int tipusMissatge = JOptionPane.QUESTION_MESSAGE;

@@ -7,9 +7,6 @@
  */
 package model;
 
-import model.Client;
-import model.Mecanic;
-import model.Recanvi;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
