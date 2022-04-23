@@ -262,7 +262,7 @@ public class ControladorReparacions implements ActionListener{
                             }
                             if(!match){
                                 menuReparacions.getFrame().setVisible(true);
-                                JOptionPane.showMessageDialog(menuReparacions.getFrame(), "El codi de client es erroni o no existeix");
+                                JOptionPane.showMessageDialog(menuReparacions.getFrame(), "El nif del client es erroni o no existeix");
                                 seleccionarOpcio(3);
                             }
                             
@@ -317,18 +317,23 @@ public class ControladorReparacions implements ActionListener{
                     JOptionPane.showMessageDialog(menuReparacions.getFrame(), "Abans s'ha de seleccionar un taller");
                 }
                 break;
-            case 5: //assignar recanvi
+            case 5: //assignar mecanics
                     menuReparacions.getFrame().setVisible(true);
                     JOptionPane.showMessageDialog(menuReparacions.getFrame(), "Funcionalitat en construcció");
             
                 break;
-            case 6: //calcular preu
+            case 6: //assignar recanvis
+                    menuReparacions.getFrame().setVisible(true);
+                    JOptionPane.showMessageDialog(menuReparacions.getFrame(), "Funcionalitat en construcció");
+            
+                break;
+            case 7: //calcular preu
                     menuReparacions.getFrame().setVisible(true);
                     JOptionPane.showMessageDialog(menuReparacions.getFrame(), "Funcionalitat en construcció");
             
                 break;
                 //TODO/<-
-            case 7: // llista
+            case 8: // llista
                 if (ControladorPrincipal.getTallerActual() != null) {
                     reparacioLlista = new ReparacioLlista();
                     afegirListenersLlista();
@@ -338,7 +343,7 @@ public class ControladorReparacions implements ActionListener{
                 }
 
                 break;
-            case 8: 
+            case 9: //seleccionar reparació
                 // en esta opción reciclamos el método selectComponent de la clase Taller que devuelve un int del puntero del componente
                 taller = ControladorPrincipal.getTallerActual();
                 int selReparacio;
@@ -363,7 +368,7 @@ public class ControladorReparacions implements ActionListener{
                     JOptionPane.showMessageDialog(menuReparacions.getFrame(), "Abans s'ha de seleccionar un taller");
                 }
                 break;
-            case 9: //desar
+            case 10: //desar
                 /*
                 TODO
                 

@@ -139,7 +139,7 @@ public class GestorMySQL implements ProveedorPersistencia {
     private PreparedStatement insereixVehicleSt;
     
     
-    private static String insereixReparacioSQL = "INSERT INTO reparacions(codi, dataInici, dataFi, taller) VALUES (?, ?, ?, ?)";
+    private static String insereixReparacioSQL = "INSERT INTO reparacions(codi, dataInici, dataFi, taller, id_client, id_vehicle) VALUES (?, ?, ?, ?, ?, ?)";
     
     private PreparedStatement insereixReparacioSt;
 
@@ -358,6 +358,8 @@ public class GestorMySQL implements ProveedorPersistencia {
                     insereixReparacioSt.setString(2, ((Reparacio) component).getDataInici());
                     insereixReparacioSt.setString(3, ((Reparacio) component).getDataFi());
                     insereixReparacioSt.setString(4, taller.getCif());
+                    insereixReparacioSt.setString(5, (((Reparacio) component).getClient()).getNif());
+                    insereixReparacioSt.setString(6, (((Reparacio) component).getVehicle()).getMatricula());
                     insereixReparacioSt.executeUpdate();
                 }
             }
