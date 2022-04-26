@@ -1,4 +1,4 @@
 # Mechanical Workshop Project
-A chain of vehicle maintenance workshops, wants to computerize the management of the repairs of the workshops. The Mechanical Workshop Manager project consists of making an application to perform this computerization. 
+Development of a mechanical workshop management project based on the baseline of an academic exercise project of computer science degree :hot_face:
 
-Josep :relaxed:
+Josep :space_invader:
